@@ -1,3 +1,3 @@
 export default function InfoPersonal() {
-  return <h2>Información personal</h2>;
+  return <h2>Información personal KIKE</h2>;
 }
