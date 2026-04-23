@@ -3,6 +3,9 @@ import MenuPrincipal from "../pages/MenuPrincipal";
 import MenuJuegos from "../pages/MenuJuegos";
 import InfoPersonal from "../pages/InfoPersonal";
 import Layout from "../components/Layout";
+import AuthHome from "../pages/AuthHome";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 export default function AppRouter() {
   return (
@@ -12,6 +15,9 @@ export default function AppRouter() {
           <Route path="/" element={<MenuPrincipal />} />
           <Route path="/MenuJuegos" element={<MenuJuegos />} />
           <Route path="/InfoPersonal" element={<InfoPersonal />} />
+          <Route path="/auth" element={<AuthHome />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -10,6 +10,8 @@ export default function Home() {
     </div>
       <button onClick={() => navigate("/MenuJuegos")}>Juegos</button>
       <button onClick={() => navigate("/InfoPersonal")}>Mis datos</button>
+      {/* boton provicional para indicar la ruta de la pantalla de autenticacion, se retirara una vez que las base de datos y la conexion sean funcinales */}
+      <button onClick={() => navigate("/auth")}>Autenticar</button>
     </>
   );
 }
