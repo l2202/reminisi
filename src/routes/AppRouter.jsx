@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import AuthHome from "../pages/AuthHome";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Memorama from "../games/Memorama";
 
 export default function AppRouter() {
   return (
@@ -18,6 +19,7 @@ export default function AppRouter() {
           <Route path="/auth" element={<AuthHome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/memorama" element={<Memorama />} />
         </Routes>
       </Layout>
     </BrowserRouter>
