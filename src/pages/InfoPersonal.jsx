@@ -13,7 +13,7 @@ export default function InfoPersonal() {
   return (
     <div className="info-container">
 
-      <div className="info-header">
+      <div className="info-header navigate-header">
         <button className="back-btn" onClick={() => navigate(-1)}>
           ←
         </button>
