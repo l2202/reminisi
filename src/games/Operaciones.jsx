@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
@@ -11,6 +12,8 @@ const configuracionNiveles = [
 ];
 
 export default function Operaciones() {
+  const navigate = useNavigate();
+
   const [nivel, setNivel] = useState(1);
   const [aciertos, setAciertos] = useState(0);
   const [racha, setRacha] = useState(0);
@@ -35,9 +38,7 @@ export default function Operaciones() {
   function crearOperacion() {
     const config = obtenerConfiguracion();
     const operador =
-      config.operadores[
-        numeroAleatorio(0, config.operadores.length - 1)
-      ];
+      config.operadores[numeroAleatorio(0, config.operadores.length - 1)];
 
     let a = numeroAleatorio(1, config.max);
     let b = numeroAleatorio(1, config.max);
@@ -51,14 +52,14 @@ export default function Operaciones() {
     }
 
     if (operador === "x") {
-    let a = numeroAleatorio(1, config.max/2);
-    let b = numeroAleatorio(1, config.max/2);
+      let a = numeroAleatorio(1, config.max / 2);
+      let b = numeroAleatorio(1, config.max / 2);
       resultado = a * b;
     }
 
     return {
       texto: `${a} ${operador} ${b}`,
-      resultado
+      resultado,
     };
   }
 
@@ -95,10 +96,7 @@ export default function Operaciones() {
       const nuevaRacha = racha + 1;
       setRacha(nuevaRacha);
 
-      if (
-        nuevaRacha >= 3 &&
-        nivel < configuracionNiveles.length
-      ) {
+      if (nuevaRacha >= 3 && nivel < configuracionNiveles.length) {
         setNivel((prev) => prev + 1);
         setRacha(0);
       }
@@ -143,10 +141,14 @@ export default function Operaciones() {
     nuevaOperacion();
   }, []);
 
-
-
   return (
     <div className="math-game">
+      <div className="navigate-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ←
+        </button>
+        <h1>Operaciones</h1>
+      </div>
 
       <div className="math-status">
         <div>
@@ -187,15 +189,10 @@ export default function Operaciones() {
       <p className="math-message">{mensaje}</p>
 
       <div className="math-actions">
-        <button onClick={nuevaOperacion}>
-          Otra operación
-        </button>
+        <button onClick={nuevaOperacion}>Otra operación</button>
 
-        <button onClick={reiniciarJuego}>
-          Reiniciar
-        </button>
+        <button onClick={reiniciarJuego}>Reiniciar</button>
       </div>
-
     </div>
   );
 }
