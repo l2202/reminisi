@@ -7,6 +7,7 @@ import AuthHome from "../pages/AuthHome";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Memorama from "../games/Memorama";
+import Operaciones from "../games/Operaciones";
 
 export default function AppRouter() {
   return (
@@ -20,6 +21,7 @@ export default function AppRouter() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/memorama" element={<Memorama />} />
+          <Route path="/operaciones" element={<Operaciones />} />
         </Routes>
       </Layout>
     </BrowserRouter>

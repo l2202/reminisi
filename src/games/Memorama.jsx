@@ -154,7 +154,7 @@ const Memorama = () => {
 
   return (
     <article className="memory-game">
-        <div className="navigate-header">
+      <div className="navigate-header">
         <button className="back-btn" onClick={() => navigate(-1)}>
           ←
         </button>
