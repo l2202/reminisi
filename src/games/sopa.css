@@ -1,0 +1,74 @@
+
+
+.word-game {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.word-game .word-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.word-game .word-board {
+  display: grid;
+  grid-template-columns: repeat(10, 35px);
+  gap: 5px;
+  justify-content: center;
+}
+
+.word-game .cell {
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.word-game .cell.selected {
+  background: #4caf50;
+  color: white;
+}
+
+.word-game ul {
+  list-style: none;
+  padding: 0;
+}
+
+.word-game li {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+
+
+@media (max-width: 480px) {
+  .word-board {
+    grid-template-columns: repeat(10, 28px);
+  }
+
+  .cell {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+}
+
+
+
+.word-game .cell.selected {
+  background: #4da6ff;
+  color: white;
+}
+
+.word-game .cell.found {
+  background: #4CAF50;
+  color: white;
+  font-weight: bold;
+}

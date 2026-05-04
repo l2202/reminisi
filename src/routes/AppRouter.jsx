@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Memorama from "../games/Memorama";
 import Operaciones from "../games/Operaciones";
+import Sopa from "../games/Sopa";
 
 export default function AppRouter() {
   return (
@@ -22,6 +23,7 @@ export default function AppRouter() {
           <Route path="/register" element={<Register />} />
           <Route path="/memorama" element={<Memorama />} />
           <Route path="/operaciones" element={<Operaciones />} />
+          <Route path="/sopaLetras" element={<Sopa />} />
         </Routes>
       </Layout>
     </BrowserRouter>
