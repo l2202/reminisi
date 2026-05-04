@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import Memorama from "../games/Memorama";
 import Operaciones from "../games/Operaciones";
 import Sopa from "../games/Sopa";
+import Patrones from "../games/Patrones";
 
 export default function AppRouter() {
   return (
@@ -24,6 +25,7 @@ export default function AppRouter() {
           <Route path="/memorama" element={<Memorama />} />
           <Route path="/operaciones" element={<Operaciones />} />
           <Route path="/sopaLetras" element={<Sopa />} />
+          <Route path="/patrones" element={<Patrones />} />
         </Routes>
       </Layout>
     </BrowserRouter>

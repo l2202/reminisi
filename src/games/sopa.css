@@ -72,3 +72,21 @@
   color: white;
   font-weight: bold;
 }
+
+.pattern-game .cell {
+  width: 60px;
+  height: 60px;
+  background: #ccc;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+/* 🔵 cuando se muestra el patrón */
+.pattern-game .cell.show {
+  background: #4CAF50;
+}
+
+/* 🟢 cuando el usuario selecciona */
+.pattern-game .cell.selected {
+  background: #2196F3;
+}
