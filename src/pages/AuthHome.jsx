@@ -15,6 +15,10 @@ export default function AuthHome() {
       <button onClick={() => navigate("/register")}>
         Crear cuenta
       </button>
+
+      <button onClick={() => navigate("/logout")}>
+        Cerrar sesion
+      </button>
     </div>
   );
 }

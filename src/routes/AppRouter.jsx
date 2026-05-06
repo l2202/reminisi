@@ -5,6 +5,7 @@ import InfoPersonal from "../pages/InfoPersonal";
 import Layout from "../components/Layout";
 import AuthHome from "../pages/AuthHome";
 import Login from "../pages/Login";
+import Logout from "../pages/Logout";
 import Register from "../pages/Register";
 import Memorama from "../games/Memorama";
 import Operaciones from "../games/Operaciones";
@@ -20,6 +21,7 @@ export default function AppRouter() {
           <Route path="/InfoPersonal" element={<InfoPersonal />} />
           <Route path="/auth" element={<AuthHome />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />
           <Route path="/memorama" element={<Memorama />} />
           <Route path="/operaciones" element={<Operaciones />} />
