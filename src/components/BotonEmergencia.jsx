@@ -1,6 +1,7 @@
 export default function BotonEmergencia() {
+  const numeroEmergencia = "911";
   return (
-    <a href="tel:911" className="emergencia">📞</a>
+    <a href={`tel:${numeroEmergencia}`} className="emergencia">📞</a>
 
   );
 }
