@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Patrones() {
+    const navigate = useNavigate();
+
   const [nivel, setNivel] = useState(1);
   const [pattern, setPattern] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -97,6 +100,12 @@ export default function Patrones() {
 
   return (
     <div className="pattern-game">
+      <div className="navigate-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ←
+        </button>
+        <h1>Patrones</h1>
+      </div>
       <h2>Nivel {nivel}</h2>
       <p>{mensaje}</p>
 
