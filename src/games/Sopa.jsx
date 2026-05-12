@@ -26,7 +26,7 @@ const direcciones = [
 ];
 
 export default function Sopa() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const tamano = 10;
   const cantidadPalabras = 5;
@@ -115,6 +115,7 @@ export default function Sopa() {
     setUbicaciones(ubic);
     setSeleccion([]);
     setEncontradas(new Set());
+    setCeldasEncontradas(new Set());
     setBloqueado(false);
     setMensaje("Toca letras en orden");
   }
@@ -231,14 +232,14 @@ export default function Sopa() {
           </div>
         ))}
       </div>
-
-      <button onClick={() => setSeleccion([])}>Limpiar</button>
-
-      <button onClick={nuevaSopa}>Nuevo</button>
-
       <p>
         {encontradas.size}/{palabras.length}
       </p>
+      <div className="game-default-actions">
+        <button onClick={() => setSeleccion([])}>Limpiar</button>
+
+        <button onClick={nuevaSopa}>Nuevo</button>
+      </div>
     </div>
   );
 }

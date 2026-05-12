@@ -1,0 +1,97 @@
+/* Contenedor Principal */
+.form-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f9;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container h2 {
+  color: #1a2e44;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-container h3 {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 1.5rem 0 1rem 0;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* Formulario estilo Tarjeta */
+.form-container form {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Estilo de los Inputs */
+.form-container input {
+  padding: 14px 16px;
+  border: 2px solid #edf2f7;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fcfdfe;
+}
+
+.form-container input:focus {
+  border-color: #2b82fb;
+  box-shadow: 0 0 0 3px rgba(43, 130, 251, 0.1);
+}
+
+/* Botón de Registro (Azul como el de Juegos) */
+.form-container button[type="submit"] {
+  margin-top: 1rem;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #2b82fb;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #1a6edb;
+}
+
+.form-container button[type="submit"]:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Mensajes de error y éxito */
+[role="alert"] {
+  color: #e53e3e;
+  background: #fff5f5;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+p {
+  color: #2f855a;
+  text-align: center;
+}
+
+/* Ajuste para input de fecha */
+input[type="date"] {
+  color: #718096;
+}

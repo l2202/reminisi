@@ -11,6 +11,8 @@ import Memorama from "../games/Memorama";
 import Operaciones from "../games/Operaciones";
 import Sopa from "../games/Sopa";
 import Patrones from "../games/Patrones";
+import Logica from "../games/Logica";
+import Sudoku from "../games/Sudoku";
 
 export default function AppRouter() {
   return (
@@ -28,6 +30,8 @@ export default function AppRouter() {
           <Route path="/operaciones" element={<Operaciones />} />
           <Route path="/sopaLetras" element={<Sopa />} />
           <Route path="/patrones" element={<Patrones />} />
+          <Route path="/Logica" element={<Logica />} />
+          <Route path="/sudoku" element={<Sudoku />} />
         </Routes>
       </Layout>
     </BrowserRouter>

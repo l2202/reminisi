@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/patrones.css";
 export default function Patrones() {
     const navigate = useNavigate();
 

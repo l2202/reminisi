@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-
+ 
 const EMOJIS_BASE = [
   "🌞",
   "🌙",
@@ -160,26 +160,21 @@ const Memorama = () => {
         </button>
         <h1>Memorama</h1>
       </div>
-      <div className="memory-controls">
-        <div>
-          <p className="memory-kicker">Elige una dificultad</p>
-          <h2>Encuentra las parejas</h2>
-        </div>
-
-        <div className="difficulty-buttons">
-          {[4, 6, 8].map((n) => (
-            <button
-              key={n}
-              className={`difficulty-btn ${numParejas === n ? "active" : ""}`}
-              onClick={() => setNumParejas(n)}
-            >
-              {DIFICULTADES[n].nombre}
-              <span>{n} parejas</span>
-            </button>
-          ))}
-        </div>
+      <div
+        className="memory-board"
+        style={{ "--columns": DIFICULTADES[numParejas].columnas }}
+      >
+        {cartas.map((carta, index) => (
+          <button
+            key={carta.id}
+            className={`memory-card ${carta.revelada ? "flipped" : ""} ${carta.emparejada ? "matched" : ""}`}
+            onClick={() => alHacerClick(index)}
+            disabled={bloqueado || carta.emparejada}
+          >
+            {carta.revelada || carta.emparejada ? carta.emoji : "?"}
+          </button>
+        ))}
       </div>
-
       <div className="memory-status">
         <div>
           <span>Parejas</span>
@@ -196,24 +191,26 @@ const Memorama = () => {
           <strong>{DIFICULTADES[numParejas].nombre}</strong>
         </div>
       </div>
+      <div className="memory-controls">
+        <div>
+          <h2>Elije la dificultad</h2>
+        </div>
+
+        <div className="difficulty-buttons">
+          {[4, 6, 8].map((n) => (
+            <button
+              key={n}
+              className={`difficulty-btn ${numParejas === n ? "active" : ""}`}
+              onClick={() => setNumParejas(n)}
+            >
+              {DIFICULTADES[n].nombre}
+              <span>{n} parejas</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       <p className={`memory-message ${mensaje.tipo}`}>{mensaje.texto}</p>
-
-      <div
-        className="memory-board"
-        style={{ "--columns": DIFICULTADES[numParejas].columnas }}
-      >
-        {cartas.map((carta, index) => (
-          <button
-            key={carta.id}
-            className={`memory-card ${carta.revelada ? "flipped" : ""} ${carta.emparejada ? "matched" : ""}`}
-            onClick={() => alHacerClick(index)}
-            disabled={bloqueado || carta.emparejada}
-          >
-            {carta.revelada || carta.emparejada ? carta.emoji : "?"}
-          </button>
-        ))}
-      </div>
 
       <div className="memory-actions">
         <button className="memory-secondary" onClick={inicializarJuego}>

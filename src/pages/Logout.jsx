@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
+import "../styles/authHome.css"
 
 export default function Logout() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Logout() {
 
       {error && <p role="alert">Error al cerrar sesion: {error}</p>}
 
-      <button onClick={handleLogout} disabled={loading}>
+      <button className="btn-logout" onClick={handleLogout} disabled={loading}>
         {loading ? "Cerrando..." : "Cerrar sesion"}
       </button>
     </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
-
+import "../styles/authHome.css"
 export default function AuthHome() {
   const navigate = useNavigate();
   const [checkingSession, setCheckingSession] = useState(true);
@@ -51,13 +51,13 @@ export default function AuthHome() {
       <p>Seleccione una opcion</p>
 
       {!hasSession && (
-        <button onClick={() => navigate("/login")}>Iniciar sesion</button>
+        <button className="btn-login" onClick={() => navigate("/login")}>Iniciar sesion</button>
       )}
 
-      <button onClick={() => navigate("/register")}>Crear cuenta</button>
+      <button className="btn-register" onClick={() => navigate("/register")}>Crear cuenta</button>
 
       {hasSession && (
-        <button onClick={() => navigate("/logout")}>Cerrar sesion</button>
+        <button className="btn-logout" onClick={() => navigate("/logout")}>Cerrar sesion</button>
       )}
     </div>
   );

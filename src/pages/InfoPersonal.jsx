@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
-
+import "../styles/infoPersonal.css";
 function calcularEdad(fechaNacimiento) {
   if (!fechaNacimiento) return "No disponible";
 
@@ -92,7 +92,7 @@ export default function InfoPersonal() {
         <div className="info-list">
           <div className="info-card">
             <div className="icon">👤</div>
-            <div>
+            <div className="info-content">
               <p className="label">Mi nombre</p>
               <p className="value">{userData.nombrepaciente}</p>
             </div>
@@ -100,7 +100,7 @@ export default function InfoPersonal() {
 
           <div className="info-card">
             <div className="icon">📅</div>
-            <div>
+            <div className="info-content">
               <p className="label">Mi edad</p>
               <p className="value">{calcularEdad(userData.fechanac)}</p>
             </div>
@@ -108,7 +108,7 @@ export default function InfoPersonal() {
 
           <div className="info-card">
             <div className="icon">🩺</div>
-            <div>
+            <div className="info-content">
               <p className="label">Mi profesion</p>
               <p className="value">{userData.profesionpaciente}</p>
             </div>
@@ -116,7 +116,7 @@ export default function InfoPersonal() {
 
           <div className="info-card">
             <div className="icon">🏠</div>
-            <div>
+            <div className="info-content">
               <p className="label">Mi direccion</p>
               <p className="value">{userData.direccionpaciente}</p>
             </div>
@@ -124,7 +124,7 @@ export default function InfoPersonal() {
 
           <div className="info-card">
             <div className="icon">🤝</div>
-            <div>
+            <div className="info-content">
               <p className="label">Mi cuidador</p>
               <p className="value">{userData.nombrecuidador}</p>
             </div>
@@ -132,7 +132,7 @@ export default function InfoPersonal() {
 
           <div className="info-card">
             <div className="icon">📞</div>
-            <div>
+            <div className="info-content">
               <p className="label">Telefono del cuidador</p>
               <p className="value">{userData.telcuidador}</p>
             </div>

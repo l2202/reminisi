@@ -1,17 +1,12 @@
-
-
 .word-game {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  text-align: center;
-}
-
-.word-game .word-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  text-align: center;
 }
 
 .word-game .word-board {
@@ -46,8 +41,6 @@
   margin: 5px 0;
 }
 
-
-
 @media (max-width: 480px) {
   .word-board {
     grid-template-columns: repeat(10, 28px);
@@ -60,15 +53,13 @@
   }
 }
 
-
-
 .word-game .cell.selected {
   background: #4da6ff;
   color: white;
 }
 
 .word-game .cell.found {
-  background: #4CAF50;
+  background: #4caf50;
   color: white;
   font-weight: bold;
 }
@@ -83,10 +74,32 @@
 
 /* 🔵 cuando se muestra el patrón */
 .pattern-game .cell.show {
-  background: #4CAF50;
+  background: #4caf50;
 }
 
 /* 🟢 cuando el usuario selecciona */
 .pattern-game .cell.selected {
-  background: #2196F3;
+  background: #2196f3;
+}
+.game-default-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.game-default-actions > button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.game-default-actions > button:first-child {
+  background: #ffffff;
+  color: #4a5568;
+}
+.game-default-actions > button:last-child {
+  background: #f6fff5;
+  color: #4b683d;
 }

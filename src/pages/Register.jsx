@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
-
+import "../styles/register.css"
 const initialForm = {
   email: "",
   password: "",

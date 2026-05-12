@@ -1,0 +1,30 @@
+.app-page{
+  width:100%;
+  max-width:var(--max-width);
+  margin:auto;
+  min-height:100vh;
+
+  padding:
+    clamp(16px,4vw,24px);
+
+  position:relative;
+}
+
+.page-title{
+  font-size:
+    clamp(2rem,5vw,3rem);
+
+  font-weight:700;
+
+  text-align:center;
+
+  margin-bottom:32px;
+}
+
+.page-header{
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  margin-bottom:24px;
+}

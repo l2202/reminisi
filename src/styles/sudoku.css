@@ -1,0 +1,71 @@
+.sudoku-top{
+  margin-bottom:24px;
+}
+
+.sudoku-board{
+  width:100%;
+
+  max-width:500px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(9,1fr);
+
+  gap:4px;
+
+  background:#1f2937;
+
+  padding:4px;
+
+  border-radius:18px;
+
+  margin-bottom:24px;
+}
+
+.sudoku-cell{
+  width:100%;
+
+  aspect-ratio:1/1;
+
+  border:none;
+
+  text-align:center;
+
+  font-size:
+    clamp(.9rem,3vw,1.4rem);
+
+  font-weight:700;
+
+  border-radius:8px;
+
+  background:white;
+
+  color:#1f2937;
+
+  min-width:0;
+}
+
+.sudoku-cell:focus{
+  outline:3px solid #60a5fa;
+}
+
+.sudoku-cell.fixed{
+  background:#dbeafe;
+
+  color:#1d4ed8;
+}
+
+.sudoku-cell:nth-child(3n){
+  margin-right:3px;
+}
+
+@media(max-width:480px){
+
+  .sudoku-cell{
+    font-size:1.1rem;
+  }
+
+}

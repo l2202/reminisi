@@ -1,0 +1,152 @@
+/* Contenedor Principal */
+.math-game {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f4f7f9;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Encabezado */
+.navigate-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.navigate-header h1 {
+  color: #1a2e44;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Barra de Estado (Nivel, Aciertos, Racha) */
+.math-status {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+}
+
+.math-status div {
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.math-status span {
+  display: block;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+.math-status strong {
+  font-size: 1.2rem;
+  color: #2b82fb;
+}
+
+/* Tarjeta de la Operación (Estilo Memorama) */
+.math-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.math-card p { color: #7f8c8d; margin: 0; }
+.math-card h2 { color: #1a2e44; font-size: 1.5rem; margin: 10px 0; }
+
+.operation-text {
+  font-size: 3.5rem !important;
+  font-weight: 800;
+  color: #6366f1; /* Morado como una de tus tarjetas */
+  margin-top: 10px !important;
+}
+
+/* Cuadrícula de Respuestas */
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.answer-btn {
+  background: #3fb747; /* Verde esmeralda de tu imagen */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.2);
+}
+
+.answer-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: #00a892;
+}
+
+.answer-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Mensaje y Acciones Finales */
+.math-message {
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2c3e50;
+  min-height: 1.5rem;
+}
+
+.math-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.math-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.math-actions button:first-child { background: #edf2f7; color: #4a5568; }
+.math-actions button:last-child { background: #fff5f5; color: #e53e3e; }

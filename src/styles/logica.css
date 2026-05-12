@@ -1,0 +1,48 @@
+.intruso-header{
+  text-align:center;
+  margin-bottom:24px;
+}
+
+.intruso-header h2{
+  font-size:2rem;
+  margin-bottom:10px;
+}
+
+.intruso-header p{
+  color:var(--soft);
+}
+
+.intruso-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:18px;
+}
+
+.intruso-btn{
+  aspect-ratio:1/1;
+
+  border-radius:28px;
+
+  background:white;
+
+  box-shadow:var(--shadow);
+
+  font-size:4rem;
+
+  transition:.2s;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.intruso-btn:active{
+  transform:scale(.96);
+}
+
+.intruso-btn.correct{
+  background:#4ade80;
+}

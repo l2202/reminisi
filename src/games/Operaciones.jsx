@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/operaciones.css";
 const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
   { max: 20, operadores: ["+", "-"] },
@@ -172,6 +172,7 @@ export default function Operaciones() {
         <h2>¿Cuánto es?</h2>
         <p className="operation-text">{operacion}</p>
       </div>
+      <p className="math-message">{mensaje}</p>
 
       <div className="answer-grid">
         {opciones.map((opcion, index) => (
@@ -185,8 +186,6 @@ export default function Operaciones() {
           </button>
         ))}
       </div>
-
-      <p className="math-message">{mensaje}</p>
 
       <div className="math-actions">
         <button onClick={nuevaOperacion}>Otra operación</button>

@@ -1,0 +1,22 @@
+.back-btn{
+  width:60px;
+  height:60px;
+
+  border-radius:50%;
+  background:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:var(--shadow);
+
+  flex-shrink:0;
+
+  transition:var(--transition);
+}
+
+.back-btn:active{
+  transform:scale(.95);
+}
+
