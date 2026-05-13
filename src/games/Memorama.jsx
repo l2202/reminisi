@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
- 
+import "../styles/memorama.css";
 const EMOJIS_BASE = [
   "🌞",
   "🌙",
@@ -21,19 +21,18 @@ const EMOJIS_BASE = [
 ];
 
 const DIFICULTADES = {
-  4: { nombre: "Facil", columnas: 4 },
-  6: { nombre: "Medio", columnas: 4 },
-  8: { nombre: "Mayor reto", columnas: 4 },
+  4: { nombre: "Dificultad Baja", columnas: 4 },
+  6: { nombre: "Dificultad Media", columnas: 4 },
+  8: { nombre: "Dificultad Alta", columnas: 4 },
+  10: { nombre: "Dificultad Maxima", columnas: 4 },
 };
 
 const Memorama = () => {
   const navigate = useNavigate();
 
-  // --- ESTADO ---
   const [numParejas, setNumParejas] = useState(4);
   const [cartas, setCartas] = useState([]);
   const [seleccionadas, setSeleccionadas] = useState([]); // Guarda los indices [index1, index2]
-  const [intentos, setIntentos] = useState(0);
   const [encontrados, setEncontrados] = useState(0);
   const [bloqueado, setBloqueado] = useState(false);
   const [mensaje, setMensaje] = useState({
@@ -41,7 +40,6 @@ const Memorama = () => {
     tipo: "",
   });
 
-  // --- LÓGICA DE INICIO ---
   const inicializarJuego = useCallback(() => {
     const seleccionados = EMOJIS_BASE.slice(0, numParejas);
     const mazo = [...seleccionados, ...seleccionados]
@@ -55,7 +53,6 @@ const Memorama = () => {
 
     setCartas(mazo);
     setEncontrados(0);
-    setIntentos(0);
     setSeleccionadas([]);
     setBloqueado(false);
     setMensaje({
@@ -69,11 +66,9 @@ const Memorama = () => {
     inicializarJuego();
   }, [inicializarJuego]);
 
-  // --- ACCIONES ---
   const alHacerClick = (index) => {
     const carta = cartas[index];
 
-    // Validaciones: no clickear si está bloqueado, si ya está revelada o si es la misma
     if (
       bloqueado ||
       carta.revelada ||
@@ -98,7 +93,6 @@ const Memorama = () => {
 
   const revisarPareja = (seleccion, tableroActual) => {
     setBloqueado(true);
-    setIntentos((prev) => prev + 1);
 
     const [idx1, idx2] = seleccion;
     const coinciden = tableroActual[idx1].emoji === tableroActual[idx2].emoji;
@@ -112,7 +106,7 @@ const Memorama = () => {
 
         if (nuevosEncontrados === numParejas) {
           setMensaje({
-            texto: `¡Muy bien! Completaste el tablero en ${intentos + 1} intentos.`,
+            texto: `¡Muy bien! Completaste el tablero`,
             tipo: "success",
           });
         } else {
@@ -160,6 +154,14 @@ const Memorama = () => {
         </button>
         <h1>Memorama</h1>
       </div>
+      <div className="memory-actions">
+        <button className="memory-secondary" onClick={inicializarJuego}>
+          <i className="fa-solid fa-rotate-right"></i> Reiniciar
+        </button>
+        <button className="memory-secondary" onClick={verBrevemente}>
+          <i className="fa-solid fa-eye"></i> Ver un momento
+        </button>
+      </div>
       <div
         className="memory-board"
         style={{ "--columns": DIFICULTADES[numParejas].columnas }}
@@ -175,7 +177,7 @@ const Memorama = () => {
           </button>
         ))}
       </div>
-      <div className="memory-status">
+      {/* <div className="memory-status">
         <div>
           <span>Parejas</span>
           <strong>
@@ -190,14 +192,14 @@ const Memorama = () => {
           <span>Dificultad</span>
           <strong>{DIFICULTADES[numParejas].nombre}</strong>
         </div>
-      </div>
+      </div> */}
       <div className="memory-controls">
-        <div>
-          <h2>Elije la dificultad</h2>
-        </div>
+          {/* <div>
+            <h2>Elije la dificultad</h2>
+          </div> */}
 
         <div className="difficulty-buttons">
-          {[4, 6, 8].map((n) => (
+          {[4, 6, 8, 10].map((n) => (
             <button
               key={n}
               className={`difficulty-btn ${numParejas === n ? "active" : ""}`}
@@ -211,15 +213,6 @@ const Memorama = () => {
       </div>
 
       <p className={`memory-message ${mensaje.tipo}`}>{mensaje.texto}</p>
-
-      <div className="memory-actions">
-        <button className="memory-secondary" onClick={inicializarJuego}>
-          <i className="fa-solid fa-rotate-right"></i> Reiniciar
-        </button>
-        <button className="memory-secondary" onClick={verBrevemente}>
-          <i className="fa-solid fa-eye"></i> Ver un momento
-        </button>
-      </div>
     </article>
   );
 };
