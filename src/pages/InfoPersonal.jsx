@@ -2,6 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
 import "../styles/infoPersonal.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserCheck,
+  faCakeCandles,
+  faBriefcase,
+  faMapLocationDot,
+  faHandHoldingMedical,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+
+function capitalizar(texto) {
+  if (!texto) return "";
+
+  return texto
+    .toLowerCase()
+    .split(" ")
+    .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+    .join(" ");
+}
 function calcularEdad(fechaNacimiento) {
   if (!fechaNacimiento) return "No disponible";
 
@@ -51,7 +70,7 @@ export default function InfoPersonal() {
         .schema("reminisi")
         .from("paciente")
         .select(
-          "nombrepaciente, nombrecuidador, fechanac, telcuidador, profesionpaciente, direccionpaciente"
+          "nombrepaciente, nombrecuidador, fechanac, telcuidador, profesionpaciente, direccionpaciente",
         )
         .eq("id", session.user.id)
         .single();
@@ -86,55 +105,73 @@ export default function InfoPersonal() {
 
       {loading && <p>Cargando informacion...</p>}
 
-      {error && !loading && <p role="alert">Error al cargar los datos: {error}</p>}
+      {error && !loading && (
+        <p role="alert">Error al cargar los datos: {error}</p>
+      )}
 
       {!loading && !error && userData && (
         <div className="info-list">
           <div className="info-card">
-            <div className="icon">👤</div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faUserCheck} />
+            </div>
             <div className="info-content">
               <p className="label">Mi nombre</p>
-              <p className="value">{userData.nombrepaciente}</p>
+              <p className="value">{capitalizar(userData.nombrepaciente)}</p>
             </div>
           </div>
 
           <div className="info-card">
-            <div className="icon">📅</div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faCakeCandles} />{" "}
+            </div>
             <div className="info-content">
               <p className="label">Mi edad</p>
-              <p className="value">{calcularEdad(userData.fechanac)}</p>
+              <p className="value">
+                {capitalizar(calcularEdad(userData.fechanac))}
+              </p>
             </div>
           </div>
 
           <div className="info-card">
-            <div className="icon">🩺</div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faBriefcase} />
+            </div>
             <div className="info-content">
               <p className="label">Mi profesion</p>
-              <p className="value">{userData.profesionpaciente}</p>
+              <p className="value">{capitalizar(userData.profesionpaciente)}</p>
             </div>
           </div>
 
           <div className="info-card">
-            <div className="icon">🏠</div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faMapLocationDot} />
+            </div>
             <div className="info-content">
               <p className="label">Mi direccion</p>
-              <p className="value">{userData.direccionpaciente}</p>
+              <p className="value">{capitalizar(userData.direccionpaciente)}</p>
             </div>
           </div>
 
           <div className="info-card">
-            <div className="icon">🤝</div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faHandHoldingMedical} />
+            </div>
             <div className="info-content">
               <p className="label">Mi cuidador</p>
-              <p className="value">{userData.nombrecuidador}</p>
+              <p className="value">{capitalizar(userData.nombrecuidador)}</p>
             </div>
           </div>
 
           <div className="info-card">
-            <div className="icon">📞</div>
+            <a href={`tel:${userData.telcuidador}`}>
+              <div className="icon icon-button">
+                <FontAwesomeIcon icon={faPhone} />
+              </div>
+            </a>
             <div className="info-content">
               <p className="label">Telefono del cuidador</p>
-              <p className="value">{userData.telcuidador}</p>
+              <p className="value">{capitalizar(userData.telcuidador)}</p>
             </div>
           </div>
         </div>

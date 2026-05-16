@@ -150,25 +150,7 @@ export default function Operaciones() {
         <h1>Operaciones</h1>
       </div>
 
-      <div className="math-status">
-        <div>
-          <span>Nivel</span>
-          <strong>{nivel}</strong>
-        </div>
-
-        <div>
-          <span>Aciertos</span>
-          <strong>{aciertos}</strong>
-        </div>
-
-        <div>
-          <span>Racha</span>
-          <strong>{racha}</strong>
-        </div>
-      </div>
-
       <div className="math-card">
-        <p>Resuelve con calma</p>
         <h2>¿Cuánto es?</h2>
         <p className="operation-text">{operacion}</p>
       </div>
@@ -185,6 +167,23 @@ export default function Operaciones() {
             {opcion}
           </button>
         ))}
+      </div>
+
+      <div className="math-status">
+        <div>
+          <span>Nivel</span>
+          <strong>{nivel}</strong>
+        </div>
+
+        <div>
+          <span>Aciertos</span>
+          <strong>{aciertos}</strong>
+        </div>
+
+        <div>
+          <span>Racha</span>
+          <strong>{racha}</strong>
+        </div>
       </div>
 
       <div className="math-actions">

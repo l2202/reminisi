@@ -4,7 +4,7 @@ import "../styles/patrones.css";
 export default function Patrones() {
     const navigate = useNavigate();
 
-  const [nivel, setNivel] = useState(1);
+  const [nivel, setNivel] = useState(10);
   const [pattern, setPattern] = useState([]);
   const [selected, setSelected] = useState([]);
   const [mostrar, setMostrar] = useState(false);
@@ -115,8 +115,6 @@ export default function Patrones() {
           display: "grid",
           gridTemplateColumns: `repeat(${size}, 1fr)`,
           gap: "10px",
-          maxWidth: "300px",
-          margin: "auto",
         }}
       >
         {Array.from({ length: totalCells }).map((_, i) => {

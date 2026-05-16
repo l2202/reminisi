@@ -1,7 +1,6 @@
-/* Contenedor principal */
 .home-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7f9;
+  background-color: #F7F7F8;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,6 +13,7 @@ h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
   font-weight: 600;
+  color: black;
 }
 
 /* Cuadrícula responsiva */
@@ -30,7 +30,7 @@ h1 {
   border: none;
   border-radius: 15px;
   padding: 3rem 1.5rem;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 500;
   color: white;
   cursor: pointer;
@@ -49,9 +49,9 @@ h1 {
 }
 
 /* Colores específicos de la imagen */
-.btn-juegos { background-color: #2b82fb; }
-.btn-datos { background-color: #00ce4c; }
-.btn-auth { background-color: #a855f7; } /* Un morado similar al de la imagen */
+.btn-juegos { background-color: #4E31AA; }
+.btn-datos { background-color: #3795BD; }
+.btn-auth { background-color: #8961BE; } /* Un morado similar al de la imagen */
 
 /* Pantalla de carga */
 .loading-screen {

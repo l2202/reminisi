@@ -1,6 +1,5 @@
-/* Contenedor Principal */
 .pattern-game {
-  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-family: "Segoe UI", Roboto, sans-serif;
   background-color: #f4f7f9;
   min-height: 100vh;
   padding: 2rem 1rem;
@@ -10,7 +9,6 @@
   text-align: center;
 }
 
-/* Encabezado */
 .navigate-header {
   display: flex;
   align-items: center;
@@ -29,46 +27,63 @@
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
 }
 
-.pattern-game h1 { color: #1a2e44; margin: 0; font-size: 2rem; }
-.pattern-game h2 { color: #20bc42; margin: 1rem 0 0.5rem; }
-.pattern-game p { color: #7f8c8d; font-size: 1.1rem; margin-bottom: 1.5rem; min-height: 1.5rem; }
+.pattern-game h1 {
+  color: #1a2e44;
+  margin: 0;
+  font-size: 2rem;
+}
+.pattern-game h2 {
+  color: #157f1f;
+  margin: 1rem 0 0.5rem;
+}
+.pattern-game p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  min-height: 1.5rem;
+}
 
-/* Estilos de las Celdas */
 .cell {
   background-color: white;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition:
+    background-color 0.3s,
+    transform 0.1s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.cell.show {
-  background-color: #ff3399; /* Rosa vibrante para mostrar el patrón */
-  transform: scale(0.95);
+.cellshow {
+  background-color: #ff4444;
+  border-radius: 12px;
+
+  transform: scale(0.9);
 }
 
-.cell.selected {
-  background-color: #00ce4c; /* Verde cuando el usuario acierta */
+.cellselected {
+  background-color: #8961be;
+  border-radius: 12px;
 }
 
-/* --- ESTILO DEL BOTÓN CENTRAL --- */
 .pattern-game > button {
   margin-top: 2.5rem;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  background-color: #009e3a; /* Morado moderno */
+  background-color: #157f1f;
   border: none;
   border-radius: 15px;
   cursor: pointer;
   box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
-  transition: transform 0.2s, background-color 0.2s;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
 }
 
 .pattern-game > button:hover {
@@ -85,3 +100,4 @@
   box-shadow: none;
   cursor: not-allowed;
 }
+
