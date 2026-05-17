@@ -1,222 +1,177 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import "../styles/sudoku.css";
 import { useNavigate } from "react-router-dom";
-import "../styles/sudoku.css"
-const dificultades = {
-  facil: 30,
-  medio: 40,
-  dificil: 50,
-};
+import GameHeader from "../components/GameHeader";
 
-const tableroBase = [
-  [5,3,4,6,7,8,9,1,2],
-  [6,7,2,1,9,5,3,4,8],
-  [1,9,8,3,4,2,5,6,7],
-  [8,5,9,7,6,1,4,2,3],
-  [4,2,6,8,5,3,7,9,1],
-  [7,1,3,9,2,4,8,5,6],
-  [9,6,1,5,3,7,2,8,4],
-  [2,8,7,4,1,9,6,3,5],
-  [3,4,5,2,8,6,1,7,9],
+const BASE_SOLUTIONS = [
+  [
+    [1, 2, 3, 4],
+    [3, 4, 1, 2],
+    [2, 3, 4, 1],
+    [4, 1, 2, 3],
+  ],
+  [
+    [2, 1, 4, 3],
+    [4, 3, 2, 1],
+    [1, 2, 3, 4],
+    [3, 4, 1, 2],
+  ],
 ];
 
-function copiar(tablero) {
-  return tablero.map((fila) => [...fila]);
-}
+const generarTableroUnico = () => {
+  let randomBase =
+    BASE_SOLUTIONS[Math.floor(Math.random() * BASE_SOLUTIONS.length)];
+  let solucion = randomBase.map((row) => [...row]);
 
-function mezclar(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
+  // Mezclas aleatorias
+  if (Math.random() > 0.5)
+    [solucion[0], solucion[1]] = [solucion[1], solucion[0]];
+  if (Math.random() > 0.5)
+    [solucion[2], solucion[3]] = [solucion[3], solucion[2]];
 
-function generarSudoku(vacios) {
-  const solucion = copiar(tableroBase);
-  const puzzle = copiar(tableroBase);
+  const swapColumns = (c1, c2) => {
+    solucion.forEach((row) => {
+      let temp = row[c1];
+      row[c1] = row[c2];
+      row[c2] = temp;
+    });
+  };
+  if (Math.random() > 0.5) swapColumns(0, 1);
+  if (Math.random() > 0.5) swapColumns(2, 3);
 
-  let eliminados = 0;
+  const numeros = [1, 2, 3, 4].sort(() => Math.random() - 0.5);
+  return solucion.map((row) => row.map((val) => numeros[val - 1]));
+};
 
-  while (eliminados < vacios) {
-    const fila = Math.floor(Math.random() * 9);
-    const col = Math.floor(Math.random() * 9);
+const crearAcertijo = (solucion, dificultad) => {
+  let visibles =
+    dificultad === "Dificultad Baja"
+      ? 10
+      : dificultad === "Dificultad Media"
+        ? 7
+        : 4;
+  let inicial = solucion.map((row) => row.map(() => ""));
+  let posiciones = [];
+  for (let r = 0; r < 4; r++)
+    for (let c = 0; c < 4; c++) posiciones.push({ r, c });
 
-    if (puzzle[fila][col] !== "") {
-      puzzle[fila][col] = "";
-      eliminados++;
-    }
+  posiciones.sort(() => Math.random() - 0.5);
+  for (let i = 0; i < visibles; i++) {
+    const { r, c } = posiciones[i];
+    inicial[r][c] = solucion[r][c];
   }
-
-  return { puzzle, solucion };
-}
+  return inicial;
+};
 
 export default function Sudoku() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [dificultad, setDificultad] = useState("facil");
-
-  const [tablero, setTablero] = useState([]);
-
+  const [dificultad, setDificultad] = useState("Dificultad Baja");
   const [solucion, setSolucion] = useState([]);
+  const [tableroInicial, setTableroInicial] = useState([]);
+  const [tableroUsuario, setTableroUsuario] = useState([]);
+  const [estado, setEstado] = useState("jugando"); // 'jugando', 'ganado', 'incorrecto'
 
-  const [mensaje, setMensaje] = useState("");
+  const iniciarJuego = (nivel = dificultad) => {
+    const nuevaSol = generarTableroUnico();
+    const nuevoAce = crearAcertijo(nuevaSol, nivel);
+    setSolucion(nuevaSol);
+    setTableroInicial(nuevoAce);
+    setTableroUsuario(nuevoAce.map((row) => [...row]));
+    setEstado("jugando");
+  };
 
-  const [errores, setErrores] = useState(0);
+  useEffect(() => iniciarJuego(), []);
 
-  function iniciarJuego() {
-    const { puzzle, solucion } =
-      generarSudoku(dificultades[dificultad]);
+  const handleCeldaChange = (fila, col, valor) => {
+    if (valor !== "" && !["1", "2", "3", "4"].includes(valor)) return;
 
-    setTablero(puzzle);
+    const nuevoTablero = tableroUsuario.map((r, fIdx) =>
+      r.map((c, cIdx) =>
+        fIdx === fila && cIdx === col
+          ? valor === ""
+            ? ""
+            : parseInt(valor)
+          : c,
+      ),
+    );
+    setTableroUsuario(nuevoTablero);
 
-    setSolucion(solucion);
+    // Comprobar si el tablero está lleno
+    const estaLleno = nuevoTablero.every((row) =>
+      row.every((celda) => celda !== ""),
+    );
 
-    setErrores(0);
-
-    setMensaje("Completa el sudoku");
-  }
-
-  useEffect(() => {
-    iniciarJuego();
-  }, [dificultad]);
-
-  function cambiarValor(fila, col, valor) {
-    if (tablero[fila][col] !== "") return;
-
-    if (!valor.match(/^[1-9]?$/)) return;
-
-    const nuevo = copiar(tablero);
-
-    nuevo[fila][col] = valor === "" ? "" : Number(valor);
-
-    setTablero(nuevo);
-  }
-
-  function revisar() {
-    let incorrectos = 0;
-
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        if (
-          tablero[i][j] !== "" &&
-          tablero[i][j] !== solucion[i][j]
-        ) {
-          incorrectos++;
-        }
-      }
-    }
-
-    if (incorrectos === 0) {
-      const completo = tablero.every((fila) =>
-        fila.every((c) => c !== "")
+    if (estaLleno) {
+      const esCorrecto = nuevoTablero.every((r, fIdx) =>
+        r.every((c, cIdx) => c === solucion[fIdx][cIdx]),
       );
-
-      if (completo) {
-        setMensaje("¡Sudoku completado! ✅");
-      } else {
-        setMensaje("Vas bien 👍");
-      }
+      setEstado(esCorrecto ? "ganado" : "incorrecto");
     } else {
-      setErrores(incorrectos);
-      setMensaje(`Hay ${incorrectos} errores ❌`);
+      setEstado("jugando");
     }
-  }
+  };
 
   return (
-    <div className="sudoku-game page">
+    <div className="sudoku-container">
+      <GameHeader title="Sudoku" />
 
-      <div className="navigate-header">
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
-          ←
-        </button>
-
-        <h1>Sudoku</h1>
-      </div>
-
-      <div className="sudoku-top card">
-
-        <div>
-          <p className="memory-kicker">
-            Selecciona dificultad
-          </p>
-
-          <h2>Completa el tablero</h2>
-        </div>
-
-        <div className="difficulty-buttons">
-          {Object.keys(dificultades).map((d) => (
-            <button
-              key={d}
-              className={`difficulty-btn ${
-                dificultad === d ? "active" : ""
-              }`}
-              onClick={() => setDificultad(d)}
+      <div className="sudoku-grid">
+        {tableroUsuario.map((fila, fIdx) =>
+          fila.map((celda, cIdx) => (
+            <div
+              key={`${fIdx}-${cIdx}`}
+              className={`sudoku-cell 
+              ${cIdx === 1 ? "cell-right-border" : ""} 
+              ${fIdx === 1 ? "cell-bottom-border" : ""}`}
             >
-              {d}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="memory-status">
-        <div>
-          <span>Errores</span>
-          <strong>{errores}</strong>
-        </div>
-
-        <div>
-          <span>Dificultad</span>
-          <strong>{dificultad}</strong>
-        </div>
-      </div>
-
-      <p className="memory-message">
-        {mensaje}
-      </p>
-
-      <div className="sudoku-board">
-        {tablero.map((fila, i) =>
-          fila.map((celda, j) => {
-
-            const editable =
-              tableroBase[i][j] !== celda;
-
-            return (
               <input
-                key={`${i}-${j}`}
+                className={`sudoku-input 
+                  ${tableroInicial[fIdx][cIdx] !== "" ? "fixed" : "user-digit"}`}
                 type="text"
-                maxLength={1}
+                inputMode="numeric"
                 value={celda}
-                disabled={!editable && celda !== ""}
-                className={`sudoku-cell ${
-                  !editable && celda !== ""
-                    ? "fixed"
-                    : ""
-                }`}
-                onChange={(e) =>
-                  cambiarValor(i, j, e.target.value)
-                }
+                disabled={tableroInicial[fIdx][cIdx] !== ""}
+                onChange={(e) => handleCeldaChange(fIdx, cIdx, e.target.value)}
               />
-            );
-          })
+            </div>
+          )),
         )}
       </div>
 
-      <div className="memory-actions">
+      {estado === "ganado" && (
+        <div className="status-message success">
+          ¡Excelente! Todo es correcto. 🎉
+        </div>
+      )}
 
-        <button
-          className="memory-secondary"
-          onClick={revisar}
-        >
-          Revisar
-        </button>
-
-        <button
-          className="memory-secondary"
-          onClick={iniciarJuego}
-        >
-          Nuevo
-        </button>
-
+      {estado === "incorrecto" && (
+        <div className="status-message error">
+          Hay errores en el tablero. ¡Sigue intentando! ❌
+        </div>
+      )}
+      <div className="memory-controls">
+        <div className="difficulty-buttons">
+          {["Dificultad Baja", "Dificultad Media", "Dificultad Alta"].map(
+            (diff) => (
+              <button
+                key={diff}
+                className={`difficulty-btn ${dificultad === diff ? "active" : ""}`}
+                onClick={() => {
+                  setDificultad(diff);
+                  iniciarJuego(diff);
+                }}
+              >
+                {diff.charAt(0).toUpperCase() + diff.slice(1)}
+              </button>
+            ),
+          )}
+        </div>
+      </div>
+      <div className="general-actions">
+      <button className="reset-button" onClick={() => iniciarJuego()}>
+        Reiniciar
+      </button>
       </div>
     </div>
   );

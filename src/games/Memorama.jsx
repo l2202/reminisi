@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/memorama.css";
+import GameHeader from "../components/GameHeader";
 const EMOJIS_BASE = [
   "🌞",
   "🌙",
@@ -148,17 +149,12 @@ const Memorama = () => {
 
   return (
     <article className="memory-game">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Memorama</h1>
-      </div>
-      <div className="memory-actions">
-        <button className="memory-secondary" onClick={inicializarJuego}>
+      <GameHeader title="Memorama" />
+      <div className="general-actions">
+        <button className="reset-button" onClick={inicializarJuego}>
           <i className="fa-solid fa-rotate-right"></i> Reiniciar
         </button>
-        <button className="memory-secondary" onClick={verBrevemente}>
+        <button className="button-secondary" onClick={verBrevemente}>
           <i className="fa-solid fa-eye"></i> Ver un momento
         </button>
       </div>
@@ -177,27 +173,8 @@ const Memorama = () => {
           </button>
         ))}
       </div>
-      {/* <div className="memory-status">
-        <div>
-          <span>Parejas</span>
-          <strong>
-            {encontrados}/{numParejas}
-          </strong>
-        </div>
-        <div>
-          <span>Intentos</span>
-          <strong>{intentos}</strong>
-        </div>
-        <div>
-          <span>Dificultad</span>
-          <strong>{DIFICULTADES[numParejas].nombre}</strong>
-        </div>
-      </div> */}
-      <div className="memory-controls">
-          {/* <div>
-            <h2>Elije la dificultad</h2>
-          </div> */}
 
+      <div className="memory-controls">
         <div className="difficulty-buttons">
           {[4, 6, 8, 10].map((n) => (
             <button

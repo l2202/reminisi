@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./sopa.css";
 import { useNavigate } from "react-router-dom";
+import GameHeader from "../components/GameHeader";
 
 const bancoPalabras = [
   "CASA",
@@ -194,12 +195,7 @@ export default function Sopa() {
 
   return (
     <div className="word-game">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Sopa de letras</h1>
-      </div>
+      <GameHeader title="Sopa de letras" />
       <p>{mensaje}</p>
 
       <div className="word-board">

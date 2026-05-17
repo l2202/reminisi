@@ -1,24 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/menujuegos.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPuzzlePiece,
+  faEquals,
+  faTableCellsLarge,
+  faCubesStacked,
+  faArrowDownAZ,
+  faUserSecret
+} from "@fortawesome/free-solid-svg-icons";
+import GameHeader from "../components/GameHeader";
 export default function MenuJuegos() {
   const navigate = useNavigate();
 
   return (
     <div className="menu-juegos-container">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Juegos</h1>
-      </div>
+      <GameHeader title="Juegos" />
 
       <div className="juegos-grid">
         <button
           className="juego-card rosa"
           onClick={() => navigate("/memorama")}
         >
-          <span>🧠</span>
+          <span>
+            <FontAwesomeIcon icon={faPuzzlePiece} />
+          </span>
           Memorama
         </button>
 
@@ -26,7 +32,9 @@ export default function MenuJuegos() {
           className="juego-card morado"
           onClick={() => navigate("/operaciones")}
         >
-          <span>🧩</span>
+          <span>
+            <FontAwesomeIcon icon={faEquals} />
+          </span>
           Operaciones
         </button>
 
@@ -34,7 +42,9 @@ export default function MenuJuegos() {
           className="juego-card verde-esmeralda"
           onClick={() => navigate("/sudoku")}
         >
-          <span>✨</span>
+          <span>
+            <FontAwesomeIcon icon={faTableCellsLarge} />
+          </span>
           Sudoku
         </button>
 
@@ -42,7 +52,9 @@ export default function MenuJuegos() {
           className="juego-card naranja"
           onClick={() => navigate("/patrones")}
         >
-          <span>📊</span>
+          <span>
+            <FontAwesomeIcon icon={faCubesStacked} />
+          </span>
           Patrones
         </button>
 
@@ -55,7 +67,7 @@ export default function MenuJuegos() {
           className="juego-card verde-esmeralda"
           onClick={() => navigate("/sopaLetras")}
         >
-          <span>📝</span>
+          <span><FontAwesomeIcon icon={faArrowDownAZ} /></span>
           Sopa de letras
         </button>
 
@@ -64,7 +76,7 @@ export default function MenuJuegos() {
             className="juego-card morado"
             onClick={() => navigate("/Logica")}
           >
-            <span>💡</span>
+            <span><FontAwesomeIcon icon={faUserSecret} /></span>
             Lógica
           </button>
         }

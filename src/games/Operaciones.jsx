@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/operaciones.css";
+import GameHeader from "../components/GameHeader";
 const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
   { max: 20, operadores: ["+", "-"] },
@@ -143,12 +144,7 @@ export default function Operaciones() {
 
   return (
     <div className="math-game">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Operaciones</h1>
-      </div>
+      <GameHeader title="Operaciones" />
 
       <div className="math-card">
         <h2>¿Cuánto es?</h2>
@@ -186,10 +182,10 @@ export default function Operaciones() {
         </div>
       </div>
 
-      <div className="math-actions">
-        <button onClick={nuevaOperacion}>Otra operación</button>
+      <div className="general-actions">
+        <button className="reset-button" onClick={reiniciarJuego}>Reiniciar</button>
+        <button className="button-secondary" onClick={nuevaOperacion}>Otra operación</button>
 
-        <button onClick={reiniciarJuego}>Reiniciar</button>
       </div>
     </div>
   );

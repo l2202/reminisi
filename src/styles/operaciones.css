@@ -1,5 +1,7 @@
 /* Contenedor Principal */
 .math-game {
+  max-width: 520px;
+  margin: 0 auto;
   font-family: "Segoe UI", Roboto, sans-serif;
   background-color: #f4f7f9;
   min-height: 100vh;
@@ -9,16 +11,7 @@
   align-items: center;
 }
 
-/* Encabezado */
-.navigate-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 2rem;
-  position: relative;
-}
+
 
 .back-btn {
   position: absolute;

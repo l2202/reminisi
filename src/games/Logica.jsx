@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/logica.css";
+import GameHeader from "../components/GameHeader";
 const categorias = [
   {
     nombre: "Frutas",
@@ -150,13 +151,7 @@ export default function Logica() {
 
   return (
     <div className="intruso-game page">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-
-        <h1>Emoji Intruso</h1>
-      </div>
+      <GameHeader title="Emoji intruso" />
 
       <div className="intruso-header card">
         <p>{mensaje}</p>

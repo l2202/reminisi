@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/patrones.css";
+import GameHeader from "../components/GameHeader";
 export default function Patrones() {
     const navigate = useNavigate();
 
@@ -100,12 +101,7 @@ export default function Patrones() {
 
   return (
     <div className="pattern-game">
-      <div className="navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Patrones</h1>
-      </div>
+      <GameHeader title="Recuerda el patron" />
       <h2>Nivel {nivel}</h2>
       <p>{mensaje}</p>
 

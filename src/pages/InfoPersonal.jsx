@@ -11,6 +11,7 @@ import {
   faHandHoldingMedical,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
+import GameHeader from "../components/GameHeader";
 
 function capitalizar(texto) {
   if (!texto) return "";
@@ -96,12 +97,7 @@ export default function InfoPersonal() {
 
   return (
     <div className="info-container">
-      <div className="info-header navigate-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <h1>Mis Datos</h1>
-      </div>
+      <GameHeader title="Mis datos" />
 
       {loading && <p>Cargando informacion...</p>}
 
