@@ -9,15 +9,7 @@
   text-align: center;
 }
 
-.navigate-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
+
 
 .back-btn {
   position: absolute;

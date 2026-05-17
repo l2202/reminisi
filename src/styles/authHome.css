@@ -1,5 +1,7 @@
 /* Contenedor principal */
 .auth-container {
+  max-width: 520px;
+  margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f7f9;
   min-height: 100vh;
@@ -33,7 +35,7 @@
 }
 
 /* Estilo de botones tipo tarjeta */
-.auth-container button {
+.auth-options button {
   border: none;
   border-radius: 20px;
   padding: 2.5rem 1.5rem;
@@ -86,3 +88,4 @@
   background-color: #f4f7f9;
   color: #7f8c8d;
 }
+

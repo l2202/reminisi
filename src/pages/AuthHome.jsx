@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
-import "../styles/authHome.css"
+import "../styles/authHome.css";
+import GameHeader from "../components/GameHeader";
 export default function AuthHome() {
   const navigate = useNavigate();
   const [checkingSession, setCheckingSession] = useState(true);
@@ -47,18 +48,26 @@ export default function AuthHome() {
 
   return (
     <div className="auth-container">
+      <GameHeader title="Gestion de cuenta" />
       <h1>Bienvenido</h1>
       <p>Seleccione una opcion</p>
+      <div className="auth-options">
+        {!hasSession && (
+          <button className="btn-login" onClick={() => navigate("/login")}>
+            Iniciar sesion
+          </button>
+        )}
 
-      {!hasSession && (
-        <button className="btn-login" onClick={() => navigate("/login")}>Iniciar sesion</button>
-      )}
+        <button className="btn-register" onClick={() => navigate("/register")}>
+          Crear cuenta
+        </button>
 
-      <button className="btn-register" onClick={() => navigate("/register")}>Crear cuenta</button>
-
-      {hasSession && (
-        <button className="btn-logout" onClick={() => navigate("/logout")}>Cerrar sesion</button>
-      )}
+        {hasSession && (
+          <button className="btn-logout" onClick={() => navigate("/logout")}>
+            Cerrar sesion
+          </button>
+        )}
+      </div>
     </div>
   );
 }
