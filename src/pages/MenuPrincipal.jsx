@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
 import "../styles/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiceSix, faInfo, faKey } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDiceSix,
+  faInfo,
+  faKey,
+  faImages,
+} from "@fortawesome/free-solid-svg-icons";
 export default function Home() {
   const navigate = useNavigate();
   const [checkingSession, setCheckingSession] = useState(true);
@@ -64,6 +69,15 @@ export default function Home() {
         <button className="btn-datos" onClick={() => navigate("/InfoPersonal")}>
           <span><FontAwesomeIcon icon={faInfo} /></span>
           Mis datos
+        </button>
+        <button
+          className="btn-recuerdos"
+          onClick={() => navigate("/MenuRecuerdos")}
+        >
+          <span>
+            <FontAwesomeIcon icon={faImages} />
+          </span>
+          Mis recuerdos
         </button>
         {/* boton provicional para indicar la ruta de la pantalla de autenticacion, se retirara una vez que las base de datos y la conexion sean funcinales */}
         <button className="btn-auth" onClick={() => navigate("/auth")}>

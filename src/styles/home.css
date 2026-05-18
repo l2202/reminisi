@@ -51,6 +51,7 @@ h1 {
 /* Colores específicos de la imagen */
 .btn-juegos { background-color: #4E31AA; }
 .btn-datos { background-color: #3795BD; }
+.btn-recuerdos { background-color: #157F1F; }
 .btn-auth { background-color: #8961BE; } /* Un morado similar al de la imagen */
 
 /* Pantalla de carga */

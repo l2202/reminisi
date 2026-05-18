@@ -285,7 +285,7 @@ export default function InfoPersonal() {
             aria-modal="true"
             aria-labelledby="edit-modal-title"
           >
-            <h2 id="edit-modal-title">Editar informacion</h2>
+            <h2 id="edit-modal-title">Editar información</h2>
             <p className="edit-modal-label">{editableFields[editField].label}</p>
 
             <div className="edit-modal-field">
