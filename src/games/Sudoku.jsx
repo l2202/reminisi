@@ -115,7 +115,11 @@ export default function Sudoku() {
   return (
     <div className="sudoku-container">
       <GameHeader title="Sudoku" />
-
+<div className="general-actions">
+      <button className="reset-button" onClick={() => iniciarJuego()}>
+        Reiniciar
+      </button>
+      </div>
       <div className="sudoku-grid">
         {tableroUsuario.map((fila, fIdx) =>
           fila.map((celda, cIdx) => (
@@ -168,11 +172,7 @@ export default function Sudoku() {
           )}
         </div>
       </div>
-      <div className="general-actions">
-      <button className="reset-button" onClick={() => iniciarJuego()}>
-        Reiniciar
-      </button>
-      </div>
+      
     </div>
   );
 }

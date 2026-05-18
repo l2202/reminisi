@@ -10,6 +10,7 @@
 
 /* Grid del Sudoku */
 .sudoku-grid {
+  margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
