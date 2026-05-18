@@ -76,6 +76,24 @@
   cursor: not-allowed;
 }
 
+.form-container .text-form-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #2b82fb;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0.35rem;
+  text-align: center;
+}
+
+.form-container .text-form-button:hover {
+  color: #1a6edb;
+  text-decoration: underline;
+}
+
 /* Mensajes de error y éxito */
 [role="alert"] {
   color: #e53e3e;

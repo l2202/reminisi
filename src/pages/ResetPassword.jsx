@@ -1,0 +1,141 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../utils/supabase";
+import "../styles/register.css";
+
+export default function ResetPassword() {
+  const navigate = useNavigate();
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
+  const [canUpdatePassword, setCanUpdatePassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+
+    async function checkRecoverySession() {
+      const { data } = await supabase.auth.getSession();
+
+      if (!active) return;
+
+      if (!data.session) {
+        setError("El enlace de recuperacion no es valido o ya expiro.");
+      } else {
+        setCanUpdatePassword(true);
+      }
+
+      setCheckingSession(false);
+    }
+
+    checkRecoverySession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setError("");
+        setCanUpdatePassword(true);
+        setCheckingSession(false);
+      }
+    });
+
+    return () => {
+      active = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  async function handleUpdatePassword(event) {
+    event.preventDefault();
+
+    if (loading) return;
+
+    setError("");
+    setMessage("");
+
+    if (newPassword.length < 6) {
+      setError("La nueva contrasena debe tener al menos 6 caracteres.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Las contrasenas no coinciden.");
+      return;
+    }
+
+    setLoading(true);
+
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (updateError) {
+      setError(updateError.message);
+      setLoading(false);
+      return;
+    }
+
+    await supabase.auth.signOut();
+
+    setLoading(false);
+    setMessage("Contrasena actualizada correctamente.");
+    navigate("/login", {
+      state: { message: "Contrasena actualizada correctamente. Inicia sesion." },
+      replace: true,
+    });
+  }
+
+  if (checkingSession) {
+    return (
+      <div className="form-container">
+        <h2>Nueva contrasena</h2>
+        <p>Revisando enlace de recuperacion...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="form-container">
+      <h2>Nueva contrasena</h2>
+
+      <form onSubmit={handleUpdatePassword}>
+        <input
+          type="password"
+          placeholder="Nueva contrasena"
+          value={newPassword}
+          onChange={(event) => setNewPassword(event.target.value)}
+          minLength={6}
+          required
+          disabled={loading || !canUpdatePassword}
+        />
+        <input
+          type="password"
+          placeholder="Confirmar nueva contrasena"
+          value={confirmPassword}
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          minLength={6}
+          required
+          disabled={loading || !canUpdatePassword}
+        />
+
+        {message && <p>{message}</p>}
+        {error && <p role="alert">Error al actualizar contrasena: {error}</p>}
+
+        <button type="submit" disabled={loading || !canUpdatePassword}>
+          {loading ? "Guardando..." : "Guardar contrasena"}
+        </button>
+
+        <button
+          type="button"
+          className="text-form-button"
+          onClick={() => navigate("/login", { replace: true })}
+        >
+          Volver a iniciar sesion
+        </button>
+      </form>
+    </div>
+  );
+}
