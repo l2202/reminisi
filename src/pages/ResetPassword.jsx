@@ -22,7 +22,7 @@ export default function ResetPassword() {
       if (!active) return;
 
       if (!data.session) {
-        setError("El enlace de recuperacion no es valido o ya expiro.");
+        setError("El enlace de recuperación no es válido o ya expiró.");
       } else {
         setCanUpdatePassword(true);
       }
@@ -57,12 +57,12 @@ export default function ResetPassword() {
     setMessage("");
 
     if (newPassword.length < 6) {
-      setError("La nueva contrasena debe tener al menos 6 caracteres.");
+      setError("La nueva contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Las contrasenas no coinciden.");
+      setError("Las contraseñas no coinciden.");
       return;
     }
 
@@ -81,9 +81,9 @@ export default function ResetPassword() {
     await supabase.auth.signOut();
 
     setLoading(false);
-    setMessage("Contrasena actualizada correctamente.");
+    setMessage("Contraseña actualizada correctamente.");
     navigate("/login", {
-      state: { message: "Contrasena actualizada correctamente. Inicia sesion." },
+      state: { message: "Contraseña actualizada correctamente. Inicia sesión." },
       replace: true,
     });
   }
@@ -91,20 +91,20 @@ export default function ResetPassword() {
   if (checkingSession) {
     return (
       <div className="form-container">
-        <h2>Nueva contrasena</h2>
-        <p>Revisando enlace de recuperacion...</p>
+        <h2>Nueva contraseña</h2>
+        <p>Revisando enlace de recuperación...</p>
       </div>
     );
   }
 
   return (
     <div className="form-container">
-      <h2>Nueva contrasena</h2>
+      <h2>Nueva contraseña</h2>
 
       <form onSubmit={handleUpdatePassword}>
         <input
           type="password"
-          placeholder="Nueva contrasena"
+          placeholder="Nueva contraseña"
           value={newPassword}
           onChange={(event) => setNewPassword(event.target.value)}
           minLength={6}
@@ -113,7 +113,7 @@ export default function ResetPassword() {
         />
         <input
           type="password"
-          placeholder="Confirmar nueva contrasena"
+          placeholder="Confirmar nueva contraseña"
           value={confirmPassword}
           onChange={(event) => setConfirmPassword(event.target.value)}
           minLength={6}
@@ -125,7 +125,7 @@ export default function ResetPassword() {
         {error && <p role="alert">Error al actualizar contrasena: {error}</p>}
 
         <button type="submit" disabled={loading || !canUpdatePassword}>
-          {loading ? "Guardando..." : "Guardar contrasena"}
+          {loading ? "Guardando..." : "Guardar contraseña"}
         </button>
 
         <button
@@ -133,7 +133,7 @@ export default function ResetPassword() {
           className="text-form-button"
           onClick={() => navigate("/login", { replace: true })}
         >
-          Volver a iniciar sesion
+          Volver a iniciar sesión
         </button>
       </form>
     </div>

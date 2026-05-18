@@ -101,8 +101,8 @@ export default function Login() {
   if (checkingSession) {
     return (
       <div className="form-container">
-        <h2>Iniciar sesion</h2>
-        <p>Revisando sesion guardada...</p>
+        <h2>Iniciar sesión</h2>
+        <p>Revisando sesión guardada...</p>
       </div>
     );
   }
@@ -110,28 +110,28 @@ export default function Login() {
   return (
     <div className="form-container">
       <h2>
-        Iniciar sesion
+        Iniciar sesión
       </h2>
 
       {authMode === "login" && (
         <form onSubmit={handleSubmit}>
           <input
             type="email"
-            placeholder="Correo electronico"
+            placeholder="Correo electrónico"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
           />
           <input
             type="password"
-            placeholder="Contrasena"
+            placeholder="Contraseña"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
           />
 
           {message && <p>{message}</p>}
-          {error && <p role="alert">Error al iniciar sesion: {error}</p>}
+          {error && <p role="alert">Error al iniciar sesión: {error}</p>}
 
           <button type="submit" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
@@ -147,7 +147,7 @@ export default function Login() {
               setResetEmail(email);
             }}
           >
-            Recuperar contrasena
+            Recuperar contraseña
           </button>
         </form>
       )}
@@ -156,14 +156,14 @@ export default function Login() {
         <form onSubmit={handlePasswordRecovery}>
           <input
             type="email"
-            placeholder="Correo electronico"
+            placeholder="Correo electrónico"
             value={resetEmail}
             onChange={(event) => setResetEmail(event.target.value)}
             required
           />
 
           {message && <p>{message}</p>}
-          {error && <p role="alert">Error al recuperar contrasena: {error}</p>}
+          {error && <p role="alert">Error al recuperar contraseña: {error}</p>}
 
           <button type="submit" disabled={loading}>
             {loading ? "Enviando..." : "Enviar enlace"}
@@ -178,7 +178,7 @@ export default function Login() {
               setMessage("");
             }}
           >
-            Volver a iniciar sesion
+            Volver a iniciar sesión
           </button>
         </form>
       )}
