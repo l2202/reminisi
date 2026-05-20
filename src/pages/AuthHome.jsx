@@ -48,7 +48,8 @@ export default function AuthHome() {
 
   return (
     <div className="auth-container">
-      <GameHeader title="Mi cuenta" />
+      {hasSession && <GameHeader title="Mi cuenta" />}
+
       <h1>Bienvenido</h1>
       <p>Seleccione una opcion</p>
       <div className="auth-options">
