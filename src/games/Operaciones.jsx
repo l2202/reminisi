@@ -6,16 +6,16 @@ const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
   { max: 20, operadores: ["+", "-"] },
   { max: 40, operadores: ["+", "-"] },
-  { max: 10, operadores: ["+", "-", "x", "x"] },
+  { max: 10, operadores: ["+", "-", "x"] },
   { max: 20, operadores: ["+", "-", "x"] },
   { max: 60, operadores: ["+", "-"] },
-  { max: 60, operadores: ["+", "-", "x"] },
+  { max: 60, operadores: ["+", "-","x"] },
 ];
 
 export default function Operaciones() {
   const navigate = useNavigate();
 
-  const [nivel, setNivel] = useState(1);
+  const [nivel, setNivel] = useState(7);
   const [aciertos, setAciertos] = useState(0);
   const [racha, setRacha] = useState(0);
   const [respuesta, setRespuesta] = useState(0);
@@ -53,8 +53,8 @@ export default function Operaciones() {
     }
 
     if (operador === "x") {
-      let a = numeroAleatorio(1, config.max / 2);
-      let b = numeroAleatorio(1, config.max / 2);
+      a = numeroAleatorio(1, Math.min(10, config.max));
+      b = numeroAleatorio(1, Math.min(10, config.max));
       resultado = a * b;
     }
 
@@ -183,9 +183,12 @@ export default function Operaciones() {
       </div>
 
       <div className="general-actions">
-        <button className="reset-button" onClick={reiniciarJuego}>Reiniciar</button>
-        <button className="button-secondary" onClick={nuevaOperacion}>Otra operación</button>
-
+        <button className="reset-button" onClick={reiniciarJuego}>
+          Reiniciar
+        </button>
+        <button className="button-secondary" onClick={nuevaOperacion}>
+          Otra operación
+        </button>
       </div>
     </div>
   );
