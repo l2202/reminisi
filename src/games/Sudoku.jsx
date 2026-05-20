@@ -63,8 +63,58 @@ const crearAcertijo = (solucion, dificultad) => {
   return inicial;
 };
 
+const validarGrupo = (grupo) => {
+  const numeros = [1, 2, 3, 4];
+
+  return grupo.length === 4 && numeros.every((n) => grupo.includes(n));
+};
+
+const validarSudoku = (tablero) => {
+  // FILAS
+
+  for (let fila = 0; fila < 4; fila++) {
+    if (!validarGrupo(tablero[fila])) {
+      return false;
+    }
+  }
+
+  // COLUMNAS
+
+  for (let col = 0; col < 4; col++) {
+    const columna = [];
+
+    for (let fila = 0; fila < 4; fila++) {
+      columna.push(tablero[fila][col]);
+    }
+
+    if (!validarGrupo(columna)) {
+      return false;
+    }
+  }
+
+  // VALIDAR 2x2
+
+  for (let fila = 0; fila < 4; fila += 2) {
+    for (let col = 0; col < 4; col += 2) {
+      const bloque = [];
+
+      for (let f = 0; f < 2; f++) {
+        for (let c = 0; c < 2; c++) {
+          bloque.push(tablero[fila + f][col + c]);
+        }
+      }
+
+      if (!validarGrupo(bloque)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
 export default function Sudoku() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [dificultad, setDificultad] = useState("Dificultad Baja");
   const [solucion, setSolucion] = useState([]);
@@ -97,15 +147,13 @@ export default function Sudoku() {
     );
     setTableroUsuario(nuevoTablero);
 
-    // Comprobar si el tablero está lleno
     const estaLleno = nuevoTablero.every((row) =>
       row.every((celda) => celda !== ""),
     );
 
     if (estaLleno) {
-      const esCorrecto = nuevoTablero.every((r, fIdx) =>
-        r.every((c, cIdx) => c === solucion[fIdx][cIdx]),
-      );
+      const esCorrecto = validarSudoku(nuevoTablero);
+
       setEstado(esCorrecto ? "ganado" : "incorrecto");
     } else {
       setEstado("jugando");
@@ -115,10 +163,10 @@ export default function Sudoku() {
   return (
     <div className="sudoku-container">
       <GameHeader title="Sudoku" />
-<div className="general-actions">
-      <button className="reset-button" onClick={() => iniciarJuego()}>
-        Reiniciar
-      </button>
+      <div className="general-actions">
+        <button className="reset-button" onClick={() => iniciarJuego()}>
+          Reiniciar
+        </button>
       </div>
       <div className="sudoku-grid">
         {tableroUsuario.map((fila, fIdx) =>
@@ -172,7 +220,6 @@ export default function Sudoku() {
           )}
         </div>
       </div>
-      
     </div>
   );
 }
