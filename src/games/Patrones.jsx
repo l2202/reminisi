@@ -5,7 +5,7 @@ import GameHeader from "../components/GameHeader";
 export default function Patrones() {
     const navigate = useNavigate();
 
-  const [nivel, setNivel] = useState(10);
+  const [nivel, setNivel] = useState(1);
   const [pattern, setPattern] = useState([]);
   const [selected, setSelected] = useState([]);
   const [mostrar, setMostrar] = useState(false);

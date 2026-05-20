@@ -98,7 +98,7 @@ export default function Logica() {
 
   const [opciones, setOpciones] = useState([]);
   const [respuesta, setRespuesta] = useState("");
-  const [mensaje, setMensaje] = useState("Selecciona el emoji diferente");
+  const [mensaje, setMensaje] = useState("Selecciona el emoji que no pertenece al grupo");
   const [bloqueado, setBloqueado] = useState(false);
 
   function mezclar(arr) {
@@ -121,7 +121,7 @@ export default function Logica() {
     setOpciones(todas);
     setRespuesta(intruso);
 
-    setMensaje("Selecciona el emoji diferente");
+    setMensaje("Selecciona el emoji que no pertenece al grupo");
     setBloqueado(false);
   }
 

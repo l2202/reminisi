@@ -196,6 +196,12 @@ export default function Sopa() {
   return (
     <div className="word-game">
       <GameHeader title="Sopa de letras" />
+
+      <div className="general-actions">
+        <button className="reset-button" onClick={nuevaSopa}>
+          Reiniciar
+        </button>
+      </div>
       <p>{mensaje}</p>
 
       <div className="word-board">
@@ -231,11 +237,6 @@ export default function Sopa() {
       <p>
         {encontradas.size}/{palabras.length}
       </p>
-      <div className="game-default-actions">
-        <button onClick={() => setSeleccion([])}>Limpiar</button>
-
-        <button onClick={nuevaSopa}>Nuevo</button>
-      </div>
     </div>
   );
 }

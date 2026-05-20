@@ -77,7 +77,7 @@ export default function MenuJuegos() {
             onClick={() => navigate("/Logica")}
           >
             <span><FontAwesomeIcon icon={faUserSecret} /></span>
-            Lógica
+            Emoji Intruso
           </button>
         }
       </div>
