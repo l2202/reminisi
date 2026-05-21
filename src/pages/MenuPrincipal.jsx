@@ -82,7 +82,7 @@ export default function Home() {
         {/* boton provicional para indicar la ruta de la pantalla de autenticacion, se retirara una vez que las base de datos y la conexion sean funcinales */}
         <button className="btn-auth" onClick={() => navigate("/auth")}>
           <span><FontAwesomeIcon icon={faKey} /></span>
-          Autenticar
+          Mi cuenta
         </button>
       </div>
     </div>
