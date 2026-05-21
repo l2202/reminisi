@@ -139,7 +139,7 @@ export default function Register() {
         </div>
 
         <div className="form-group">
-          <label>Fecha de nacimiento</label>
+          <label>Fecha de nacimiento del paciente</label>
           <input
             type="date"
             name="fechanac"
