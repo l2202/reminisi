@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
-import "../styles/register.css"
+import "../styles/register.css";
 const initialForm = {
   email: "",
   password: "",
@@ -91,73 +91,96 @@ export default function Register() {
       <h2>Crear Cuenta</h2>
 
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo electronico"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
-          minLength={6}
-          required
-        />
+        <div className="form-group">
+          <label>Correo electrónico</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            minLength={6}
+            required
+          />
+        </div>
 
         <h3>Datos del paciente</h3>
 
-        <input
-          type="text"
-          name="nombrepaciente"
-          placeholder="Nombre del paciente"
-          value={form.nombrepaciente}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="nombrecuidador"
-          placeholder="Nombre del cuidador"
-          value={form.nombrecuidador}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="date"
-          name="fechanac"
-          value={form.fechanac}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="telcuidador"
-          placeholder="Telefono del cuidador"
-          value={form.telcuidador}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="profesionpaciente"
-          placeholder="Profesion del paciente"
-          value={form.profesionpaciente}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="direccionpaciente"
-          placeholder="Direccion del paciente"
-          value={form.direccionpaciente}
-          onChange={handleChange}
-          required
-        />
+        <div className="form-group">
+          <label>Nombre del paciente</label>
+          <input
+            type="text"
+            name="nombrepaciente"
+            value={form.nombrepaciente}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Nombre del cuidador</label>
+          <input
+            type="text"
+            name="nombrecuidador"
+            value={form.nombrecuidador}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Fecha de nacimiento</label>
+          <input
+            type="date"
+            name="fechanac"
+            value={form.fechanac}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Teléfono del cuidador</label>
+          <input
+            type="tel"
+            name="telcuidador"
+            value={form.telcuidador}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Profesión del paciente</label>
+          <input
+            type="text"
+            name="profesionpaciente"
+            value={form.profesionpaciente}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Dirección del paciente</label>
+          <input
+            type="text"
+            name="direccionpaciente"
+            value={form.direccionpaciente}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         {error && <p role="alert">Error al registrar: {error}</p>}
         {message && <p>{message}</p>}

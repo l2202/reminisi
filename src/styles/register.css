@@ -113,3 +113,15 @@ p {
 input[type="date"] {
   color: #718096;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #4a5568;
+  font-weight: 600;
+}
