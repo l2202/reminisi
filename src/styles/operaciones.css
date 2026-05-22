@@ -157,3 +157,12 @@
   background: #fff5f5;
   color: #e53e3e;
 }
+
+.math-message.correcto {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.math-message.incorrecto {
+  color: #ef4444;
+}

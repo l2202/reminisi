@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/operaciones.css";
 import GameHeader from "../components/GameHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
   { max: 20, operadores: ["+", "-"] },
@@ -9,13 +11,13 @@ const configuracionNiveles = [
   { max: 10, operadores: ["+", "-", "x"] },
   { max: 20, operadores: ["+", "-", "x"] },
   { max: 60, operadores: ["+", "-"] },
-  { max: 60, operadores: ["+", "-","x"] },
+  { max: 60, operadores: ["+", "-", "x"] },
 ];
 
 export default function Operaciones() {
   const navigate = useNavigate();
 
-  const [nivel, setNivel] = useState(7);
+  const [nivel, setNivel] = useState(1);
   const [aciertos, setAciertos] = useState(0);
   const [racha, setRacha] = useState(0);
   const [respuesta, setRespuesta] = useState(0);
@@ -23,6 +25,7 @@ export default function Operaciones() {
   const [opciones, setOpciones] = useState([]);
   const [mensaje, setMensaje] = useState("Elige la respuesta correcta.");
   const [bloqueado, setBloqueado] = useState(false);
+  const [tipoMensaje, setTipoMensaje] = useState("info");
 
   function numeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -118,14 +121,17 @@ export default function Operaciones() {
 
     if (acerto) {
       setMensaje("Muy bien. Vamos con otra.");
+      setTipoMensaje("correcto");
     } else {
       setMensaje(`La respuesta era ${respuesta}.`);
+      setTipoMensaje("incorrecto");
     }
 
     actualizarDificultad(acerto);
 
     setTimeout(() => {
       nuevaOperacion();
+      setTipoMensaje("info");
     }, 1400);
   }
 
@@ -150,12 +156,17 @@ export default function Operaciones() {
         <h2>¿Cuánto es?</h2>
         <p className="operation-text">{operacion}</p>
       </div>
-      <p className="math-message">{mensaje}</p>
+      <p className={`math-message ${tipoMensaje}`}>
+        {tipoMensaje === "correcto" && (
+          <FontAwesomeIcon icon={faCheck} style={{ marginRight: "6px" }} />
+        )}
+        {mensaje}
+      </p>
 
       <div className="answer-grid">
         {opciones.map((opcion, index) => (
           <button
-            key={index}
+            key={`${operacion}-${opcion}`}
             className="answer-btn"
             disabled={bloqueado}
             onClick={() => revisarRespuesta(opcion)}
