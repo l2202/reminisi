@@ -1,8 +1,11 @@
 import React from "react";
+import GameHeader from "../components/GameHeader";
 
 const Vision = () => {
   return (
-    <h1>Vision</h1>
+    <div>
+        <GameHeader title="Reconocer Objetos" />
+    </div>
   );
 };
 
