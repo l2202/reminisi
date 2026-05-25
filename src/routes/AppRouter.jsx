@@ -15,6 +15,7 @@ import Sopa from "../games/Sopa";
 import Patrones from "../games/Patrones";
 import Logica from "../games/Logica";
 import Sudoku from "../games/Sudoku";
+import Vision from "../pages/Vision";
 
 export default function AppRouter() {
   return (
@@ -27,6 +28,7 @@ export default function AppRouter() {
           <Route path="/InfoPersonal" element={<InfoPersonal />} />
           <Route path="/auth" element={<AuthHome />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/vision" element={<Vision />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />

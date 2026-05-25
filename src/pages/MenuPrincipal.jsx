@@ -67,7 +67,9 @@ export default function Home() {
           Juegos
         </button>
         <button className="btn-datos" onClick={() => navigate("/InfoPersonal")}>
-          <span><FontAwesomeIcon icon={faInfo} /></span>
+          <span>
+            <FontAwesomeIcon icon={faInfo} />
+          </span>
           Mis datos
         </button>
         <button
@@ -79,9 +81,19 @@ export default function Home() {
           </span>
           Mis recuerdos
         </button>
-        {/* boton provicional para indicar la ruta de la pantalla de autenticacion, se retirara una vez que las base de datos y la conexion sean funcinales */}
+        <button
+          className="btn-vision"
+          onClick={() => navigate("/vision")}
+        >
+          <span>
+            <FontAwesomeIcon icon={faImages} />
+          </span>
+          Reconocer Objetos
+        </button>
         <button className="btn-auth" onClick={() => navigate("/auth")}>
-          <span><FontAwesomeIcon icon={faKey} /></span>
+          <span>
+            <FontAwesomeIcon icon={faKey} />
+          </span>
           Mi cuenta
         </button>
       </div>
