@@ -8,6 +8,7 @@ import {
   faInfo,
   faKey,
   faImages,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 export default function Home() {
   const navigate = useNavigate();
@@ -81,12 +82,9 @@ export default function Home() {
           </span>
           Mis recuerdos
         </button>
-        <button
-          className="btn-vision"
-          onClick={() => navigate("/vision")}
-        >
+        <button className="btn-vision" onClick={() => navigate("/vision")}>
           <span>
-            <FontAwesomeIcon icon={faImages} />
+            <FontAwesomeIcon icon={faEye} />{" "}
           </span>
           Reconocer Objetos
         </button>
