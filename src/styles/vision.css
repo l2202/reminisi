@@ -1,0 +1,177 @@
+.vision-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background: #f4f7f9;
+  color: #253444;
+}
+
+.vision-page .navigate-header {
+  margin-inline: auto;
+}
+
+.vision-panel {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.vision-camera {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #111827;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.vision-video,
+.vision-canvas,
+.vision-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.vision-video {
+  object-fit: fill;
+}
+
+.vision-canvas {
+  pointer-events: none;
+}
+
+.vision-placeholder {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  color: #ffffff;
+  text-align: center;
+  background: #172033;
+  z-index: 1;
+}
+
+.vision-placeholder svg {
+  font-size: 3rem;
+  color: #00bfa5;
+}
+
+.vision-placeholder p {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.vision-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.vision-status {
+  color: #536272;
+  font-weight: 700;
+}
+
+.vision-start-btn,
+.vision-stop-btn {
+  min-height: 54px;
+  padding: 0 1.35rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.vision-start-btn {
+  background: #157f1f;
+}
+
+.vision-stop-btn {
+  background: #d72638;
+}
+
+.vision-error {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: #ffe7e7;
+  color: #a51220;
+  font-weight: 700;
+}
+
+.vision-results {
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.vision-results h2 {
+  margin: 0 0 1rem;
+  color: #253444;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.vision-results ul {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.vision-results li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 10px;
+  background: #eef8f6;
+  color: #1e3b36;
+  font-size: 1rem;
+}
+
+.vision-results span {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.vision-results strong {
+  color: #007c6f;
+}
+
+.vision-empty {
+  color: #667381;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .vision-page {
+    padding: 1.25rem;
+  }
+
+  .vision-camera {
+    aspect-ratio: 4 / 5;
+  }
+
+  .vision-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .vision-start-btn,
+  .vision-stop-btn {
+    width: 100%;
+  }
+}
