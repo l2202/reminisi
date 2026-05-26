@@ -20,7 +20,7 @@ const etiquetas = {
   boat: "barco",
   "traffic light": "semaforo",
   "fire hydrant": "hidrante",
-  "stop sign": "senal de alto",
+  "stop sign": "señal de alto",
   bench: "banca",
   bird: "ave",
   cat: "gato",
@@ -251,7 +251,9 @@ const Vision = () => {
       await videoRef.current.play();
       setCameraActive(true);
     } catch {
-      setError("No se pudo acceder a la camara. Revisa los permisos del navegador.");
+      setError(
+        "No se pudo acceder a la camara. Revisa los permisos del navegador.",
+      );
     }
   };
 
@@ -260,6 +262,17 @@ const Vision = () => {
       <GameHeader title="Reconocer Objetos" />
 
       <section className="vision-panel" aria-label="Detector de objetos">
+        <div className="vision-controls">
+          <p className="vision-status">{modelStatus}</p>
+          <button
+            className={cameraActive ? "vision-stop-btn" : "vision-start-btn"}
+            onClick={cameraActive ? detenerCamara : iniciarCamara}
+            type="button"
+          >
+            <FontAwesomeIcon icon={cameraActive ? faStop : faCamera} />
+            {cameraActive ? "Detener camara" : "Iniciar camara"}
+          </button>
+        </div>
         <div className="vision-camera">
           {!cameraActive && (
             <div className="vision-placeholder">
@@ -275,18 +288,6 @@ const Vision = () => {
             aria-label="Vista de la camara"
           />
           <canvas ref={canvasRef} className="vision-canvas" />
-        </div>
-
-        <div className="vision-controls">
-          <p className="vision-status">{modelStatus}</p>
-          <button
-            className={cameraActive ? "vision-stop-btn" : "vision-start-btn"}
-            onClick={cameraActive ? detenerCamara : iniciarCamara}
-            type="button"
-          >
-            <FontAwesomeIcon icon={cameraActive ? faStop : faCamera} />
-            {cameraActive ? "Detener camara" : "Iniciar camara"}
-          </button>
         </div>
 
         {error && (
@@ -308,7 +309,9 @@ const Vision = () => {
             </ul>
           ) : (
             <p className="vision-empty">
-              {cameraActive ? "Apunta la camara hacia un objeto." : "Sin detecciones todavia."}
+              {cameraActive
+                ? "Apunta la camara hacia un objeto."
+                : "Sin detecciones todavia."}
             </p>
           )}
         </div>
