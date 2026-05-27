@@ -36,7 +36,7 @@
 }
 
 .vision-video {
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .vision-canvas {

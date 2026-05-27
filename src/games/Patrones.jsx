@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/patrones.css";
 import GameHeader from "../components/GameHeader";
+import sonidoSeleccionar from "../assets/audio/select2.mp3";
+import sonidoCorrecto from "../assets/audio/correcto_largo.wav";
+import sonidoFallo from "../assets/audio/fallo_largo.wav";
+
 export default function Patrones() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [nivel, setNivel] = useState(1);
   const [pattern, setPattern] = useState([]);
@@ -11,6 +15,9 @@ export default function Patrones() {
   const [mostrar, setMostrar] = useState(false);
   const [bloqueado, setBloqueado] = useState(true);
   const [mensaje, setMensaje] = useState("");
+  const audioSeleccionar = new Audio(sonidoSeleccionar);
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
 
   const size = obtenerTamano(nivel);
   const totalCells = size * size;
@@ -58,20 +65,21 @@ export default function Patrones() {
     if (!pattern.includes(index)) {
       setMensaje("Incorrecto ❌");
       setBloqueado(true);
-
+      audioFallo.play();
+      mostrarPatronTemporal();
       setTimeout(() => {
         setNivel(1);
         iniciarRonda();
       }, 1200);
-
       return;
     }
+    audioSeleccionar.play();
 
     // si completó todos
     if (nuevos.length === pattern.length) {
       setMensaje("Correcto ✅");
       setBloqueado(true);
-
+      audioCorrecto.play();      
       setTimeout(() => {
         setNivel((n) => n + 1);
       }, 1000);
