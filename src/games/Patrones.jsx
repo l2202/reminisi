@@ -68,7 +68,7 @@ export default function Patrones() {
       
       setBloqueado(true);
       audioFallo.play();
-      mostrarPatronTemporal(false);
+      mostrarPatronDespuesDePerder();
       setTimeout(() => {
         setNivel(1);
         iniciarRonda();
@@ -87,14 +87,18 @@ export default function Patrones() {
       }, 1000);
     }
   }
-
-  function mostrarPatronTemporal(perdio = false) {
+ function mostrarPatronDespuesDePerder() {
+  if (mostrar || bloqueado) return;
+    setMostrar(true);
+    setBloqueado(true);
+    setMensaje("Incorrecto ❌");
+ }
+  function mostrarPatronTemporal() {
     if (mostrar || bloqueado) return; // evita bugs
 
     setMostrar(true);
     setBloqueado(true);
-    perdio ? setMensaje("Observa otra vez...") : setMensaje("Incorrecto ❌");
-    perdio ? audioAlerta.play() : false;
+    setMensaje("Observa otra vez...")
 
     setTimeout(() => {
       setMostrar(false);
