@@ -1,4 +1,6 @@
 .pattern-game {
+  max-width: 520px;
+  margin: 0 auto;
   font-family: "Segoe UI", Roboto, sans-serif;
   background-color: #f4f7f9;
   min-height: 100vh;
@@ -8,8 +10,6 @@
   align-items: center; /* Centra horizontalmente */
   text-align: center;
 }
-
-
 
 .back-btn {
   position: absolute;
@@ -92,4 +92,3 @@
   box-shadow: none;
   cursor: not-allowed;
 }
-

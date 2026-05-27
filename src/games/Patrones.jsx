@@ -5,6 +5,7 @@ import GameHeader from "../components/GameHeader";
 import sonidoSeleccionar from "../assets/audio/select2.mp3";
 import sonidoCorrecto from "../assets/audio/correcto_largo.wav";
 import sonidoFallo from "../assets/audio/fallo_largo.wav";
+import sonidoAlerta from "../assets/audio/alerta.mp3";
 
 export default function Patrones() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function Patrones() {
   const audioSeleccionar = new Audio(sonidoSeleccionar);
   const audioCorrecto = new Audio(sonidoCorrecto);
   const audioFallo = new Audio(sonidoFallo);
+  const audioAlerta = new Audio(sonidoAlerta);
 
   const size = obtenerTamano(nivel);
   const totalCells = size * size;
@@ -46,7 +48,7 @@ export default function Patrones() {
     setMostrar(true);
     setBloqueado(true);
     setMensaje("Observa...");
-
+    audioAlerta.play();
     setTimeout(() => {
       setMostrar(false);
       setBloqueado(false);
@@ -63,10 +65,10 @@ export default function Patrones() {
     setSelected(nuevos);
 
     if (!pattern.includes(index)) {
-      setMensaje("Incorrecto ❌");
+      
       setBloqueado(true);
       audioFallo.play();
-      mostrarPatronTemporal();
+      mostrarPatronTemporal(false);
       setTimeout(() => {
         setNivel(1);
         iniciarRonda();
@@ -86,12 +88,13 @@ export default function Patrones() {
     }
   }
 
-  function mostrarPatronTemporal() {
+  function mostrarPatronTemporal(perdio = false) {
     if (mostrar || bloqueado) return; // evita bugs
 
     setMostrar(true);
     setBloqueado(true);
-    setMensaje("Observa otra vez...");
+    perdio ? setMensaje("Observa otra vez...") : setMensaje("Incorrecto ❌");
+    perdio ? audioAlerta.play() : false;
 
     setTimeout(() => {
       setMostrar(false);
