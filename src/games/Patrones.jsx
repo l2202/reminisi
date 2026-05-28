@@ -65,13 +65,16 @@ export default function Patrones() {
     setSelected(nuevos);
 
     if (!pattern.includes(index)) {
-      
       setBloqueado(true);
       audioFallo.play();
       mostrarPatronDespuesDePerder();
       setTimeout(() => {
-        setNivel(1);
-        iniciarRonda();
+        if (nivel === 1) {
+          iniciarRonda();
+        } else {
+          setNivel(1);
+        }
+        //iniciarRonda();
       }, 1200);
       return;
     }
@@ -81,24 +84,24 @@ export default function Patrones() {
     if (nuevos.length === pattern.length) {
       setMensaje("Correcto ✅");
       setBloqueado(true);
-      audioCorrecto.play();      
+      audioCorrecto.play();
       setTimeout(() => {
         setNivel((n) => n + 1);
       }, 1000);
     }
   }
- function mostrarPatronDespuesDePerder() {
-  if (mostrar || bloqueado) return;
+  function mostrarPatronDespuesDePerder() {
+    if (mostrar || bloqueado) return;
     setMostrar(true);
     setBloqueado(true);
     setMensaje("Incorrecto ❌");
- }
+  }
   function mostrarPatronTemporal() {
     if (mostrar || bloqueado) return; // evita bugs
 
     setMostrar(true);
     setBloqueado(true);
-    setMensaje("Observa otra vez...")
+    setMensaje("Observa otra vez...");
 
     setTimeout(() => {
       setMostrar(false);

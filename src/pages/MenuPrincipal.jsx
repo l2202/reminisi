@@ -10,9 +10,19 @@ import {
   faImages,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
+import sonidoSelect from "../assets/audio/select.mp3"
+
 export default function Home() {
   const navigate = useNavigate();
   const [checkingSession, setCheckingSession] = useState(true);
+  const audioSelect = new Audio(sonidoSelect);
+
+  function navegarConSolido(ruta){
+    audioSelect.play();
+    setTimeout(() => {
+      navigate(ruta);
+    }, 120);
+  }
 
   useEffect(() => {
     let active = true;
@@ -36,7 +46,7 @@ export default function Home() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!session) {
-        navigate("/auth", { replace: true });
+        navegarConSolido("/auth", { replace: true });
       }
     });
 
@@ -61,13 +71,13 @@ export default function Home() {
         <h1>Reminisi</h1>
       </div>
       <div className="home-grid">
-        <button className="btn-juegos" onClick={() => navigate("/MenuJuegos")}>
+        <button className="btn-juegos" onClick={() => navegarConSolido("/MenuJuegos")}>
           <span>
             <FontAwesomeIcon icon={faDiceSix} />
           </span>
           Juegos
         </button>
-        <button className="btn-datos" onClick={() => navigate("/InfoPersonal")}>
+        <button className="btn-datos" onClick={() => navegarConSolido("/InfoPersonal")}>
           <span>
             <FontAwesomeIcon icon={faInfo} />
           </span>
@@ -75,20 +85,20 @@ export default function Home() {
         </button>
         <button
           className="btn-recuerdos"
-          onClick={() => navigate("/MenuRecuerdos")}
+          onClick={() => navegarConSolido("/MenuRecuerdos")}
         >
           <span>
             <FontAwesomeIcon icon={faImages} />
           </span>
           Mis recuerdos
         </button>
-        <button className="btn-vision" onClick={() => navigate("/vision")}>
+        <button className="btn-vision" onClick={() => navegarConSolido("/vision")}>
           <span>
             <FontAwesomeIcon icon={faEye} />{" "}
           </span>
           Reconocer Objetos
         </button>
-        <button className="btn-auth" onClick={() => navigate("/auth")}>
+        <button className="btn-auth" onClick={() => navegarConSolido("/auth")}>
           <span>
             <FontAwesomeIcon icon={faKey} />
           </span>

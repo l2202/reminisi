@@ -9,8 +9,18 @@ import {
   faArrowDownAZ,
   faUserSecret
 } from "@fortawesome/free-solid-svg-icons";
+
+import sonidoSelect from "../assets/audio/select.mp3"
 import GameHeader from "../components/GameHeader";
 export default function MenuJuegos() {
+  const audioSelect = new Audio(sonidoSelect);
+  function navegarConSolido(ruta){
+    audioSelect.play();
+    setTimeout(() => {
+      navigate(ruta);
+    }, 120);
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -20,7 +30,7 @@ export default function MenuJuegos() {
       <div className="juegos-grid">
         <button
           className="juego-card rosa"
-          onClick={() => navigate("/memorama")}
+          onClick={() => navegarConSolido("/memorama")}
         >
           <span>
             <FontAwesomeIcon icon={faPuzzlePiece} />
@@ -30,7 +40,7 @@ export default function MenuJuegos() {
 
         <button
           className="juego-card morado"
-          onClick={() => navigate("/operaciones")}
+          onClick={() => navegarConSolido("/operaciones")}
         >
           <span>
             <FontAwesomeIcon icon={faEquals} />
@@ -40,7 +50,7 @@ export default function MenuJuegos() {
 
         <button
           className="juego-card verde-esmeralda"
-          onClick={() => navigate("/sudoku")}
+          onClick={() => navegarConSolido("/sudoku")}
         >
           <span>
             <FontAwesomeIcon icon={faTableCellsLarge} />
@@ -50,7 +60,7 @@ export default function MenuJuegos() {
 
         <button
           className="juego-card naranja"
-          onClick={() => navigate("/patrones")}
+          onClick={() => navegarConSolido("/patrones")}
         >
           <span>
             <FontAwesomeIcon icon={faCubesStacked} />
@@ -65,7 +75,7 @@ export default function MenuJuegos() {
 
         <button
           className="juego-card verde-esmeralda"
-          onClick={() => navigate("/sopaLetras")}
+          onClick={() => navegarConSolido("/sopaLetras")}
         >
           <span><FontAwesomeIcon icon={faArrowDownAZ} /></span>
           Sopa de letras
@@ -74,7 +84,7 @@ export default function MenuJuegos() {
         {
           <button
             className="juego-card morado"
-            onClick={() => navigate("/Logica")}
+            onClick={() => navegarConSolido("/Logica")}
           >
             <span><FontAwesomeIcon icon={faUserSecret} /></span>
             Emoji Intruso
