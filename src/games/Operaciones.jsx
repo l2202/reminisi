@@ -4,6 +4,11 @@ import "../styles/operaciones.css";
 import GameHeader from "../components/GameHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import sonidoCorrecto from "../assets/audio/correcto_largo.wav";
+import sonidoFallo from "../assets/audio/fallo_corto.mp3";
+import sonidoReset from "../assets/audio/reset.mp3";
+import sonidoSwap from "../assets/audio/swap.mp3";
+
 const configuracionNiveles = [
   { max: 10, operadores: ["+"] },
   { max: 20, operadores: ["+", "-"] },
@@ -26,7 +31,10 @@ export default function Operaciones() {
   const [mensaje, setMensaje] = useState("Elige la respuesta correcta.");
   const [bloqueado, setBloqueado] = useState(false);
   const [tipoMensaje, setTipoMensaje] = useState("info");
-
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
+  const audioReset = new Audio(sonidoReset);
+  const audioSwap = new Audio(sonidoSwap);
   function numeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -84,6 +92,7 @@ export default function Operaciones() {
   }
 
   function nuevaOperacion() {
+    
     const nueva = crearOperacion();
 
     setOperacion(nueva.texto);
@@ -120,9 +129,11 @@ export default function Operaciones() {
     setBloqueado(true);
 
     if (acerto) {
+      audioCorrecto.play();
       setMensaje("Muy bien. Vamos con otra.");
       setTipoMensaje("correcto");
     } else {
+      audioFallo.play();
       setMensaje(`La respuesta era ${respuesta}.`);
       setTipoMensaje("incorrecto");
     }
@@ -136,6 +147,7 @@ export default function Operaciones() {
   }
 
   function reiniciarJuego() {
+    audioReset.play();
     setNivel(1);
     setAciertos(0);
     setRacha(0);
@@ -197,7 +209,10 @@ export default function Operaciones() {
         <button className="reset-button" onClick={reiniciarJuego}>
           Reiniciar
         </button>
-        <button className="button-secondary" onClick={nuevaOperacion}>
+        <button className="button-secondary" onClick={() => {
+          audioSwap.play();
+          nuevaOperacion();
+        }}>
           Otra operación
         </button>
       </div>

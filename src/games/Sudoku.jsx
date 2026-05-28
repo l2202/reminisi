@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../styles/sudoku.css";
 import { useNavigate } from "react-router-dom";
 import GameHeader from "../components/GameHeader";
-
+import sonidoCorrecto from "../assets/audio/correcto_largo.wav";
+import sonidoFallo from "../assets/audio/fallo_corto.mp3";
+import sonidoReset from "../assets/audio/reset.mp3";
+import sonidoSwap from "../assets/audio/swap.mp3";
 const BASE_SOLUTIONS = [
   [
     [1, 2, 3, 4],
@@ -122,6 +125,10 @@ export default function Sudoku() {
   const [tableroUsuario, setTableroUsuario] = useState([]);
   const [estado, setEstado] = useState("jugando"); // 'jugando', 'ganado', 'incorrecto'
 
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
+  const audioReset = new Audio(sonidoReset);
+  const audioSwap = new Audio(sonidoSwap);
   const iniciarJuego = (nivel = dificultad) => {
     const nuevaSol = generarTableroUnico();
     const nuevoAce = crearAcertijo(nuevaSol, nivel);
@@ -153,8 +160,14 @@ export default function Sudoku() {
 
     if (estaLleno) {
       const esCorrecto = validarSudoku(nuevoTablero);
-
-      setEstado(esCorrecto ? "ganado" : "incorrecto");
+      if (esCorrecto) {
+        audioCorrecto.play();
+        setEstado("ganado");
+      } else {
+        audioFallo.play();
+        setEstado("incorrecto");
+      }
+      //setEstado(esCorrecto ? "ganado" : "incorrecto");
     } else {
       setEstado("jugando");
     }
@@ -164,7 +177,13 @@ export default function Sudoku() {
     <div className="sudoku-container">
       <GameHeader title="Sudoku" />
       <div className="general-actions">
-        <button className="reset-button" onClick={() => iniciarJuego()}>
+        <button
+          className="reset-button"
+          onClick={() => {
+            audioReset.play();
+            iniciarJuego();
+          }}
+        >
           Reiniciar
         </button>
       </div>
@@ -193,7 +212,7 @@ export default function Sudoku() {
 
       {estado === "ganado" && (
         <div className="status-message success">
-          ¡Excelente! Todo es correcto. 🎉
+          ¡Excelente! Todo es correcto.
         </div>
       )}
 
@@ -210,6 +229,7 @@ export default function Sudoku() {
                 key={diff}
                 className={`difficulty-btn ${dificultad === diff ? "active" : ""}`}
                 onClick={() => {
+                  audioSwap.play();
                   setDificultad(diff);
                   iniciarJuego(diff);
                 }}

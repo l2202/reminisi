@@ -2,6 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/memorama.css";
 import GameHeader from "../components/GameHeader";
+import sonidoSeleccionar from "../assets/audio/select2.mp3";
+import sonidoCorrecto from "../assets/audio/correcto_corto.mp3";
+import sonidoFallo from "../assets/audio/fallo_corto.mp3";
+import sonidoTictac from "../assets/audio/tictac.mp3";
+import sonidoReset from "../assets/audio/reset.mp3";
+import sonidoCorrectoLargo from "../assets/audio/correcto_largo.wav";
+import sonidoSwap from "../assets/audio/swap.mp3";
+
 const EMOJIS_BASE = [
   "🌞",
   "🌙",
@@ -40,27 +48,38 @@ const Memorama = () => {
     texto: "Toca dos tarjetas para buscar una pareja.",
     tipo: "",
   });
-
-  const inicializarJuego = useCallback(() => {
-    const seleccionados = EMOJIS_BASE.slice(0, numParejas);
-    const mazo = [...seleccionados, ...seleccionados]
-      .sort(() => Math.random() - 0.5)
-      .map((emoji, index) => ({
-        id: index,
-        emoji,
-        revelada: false,
-        emparejada: false,
-      }));
-
-    setCartas(mazo);
-    setEncontrados(0);
-    setSeleccionadas([]);
-    setBloqueado(false);
-    setMensaje({
-      texto: "Toca dos tarjetas para buscar una pareja.",
-      tipo: "",
-    });
-  }, [numParejas]);
+  const audioSeleccionar = new Audio(sonidoSeleccionar);
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
+  const audioTictac = new Audio(sonidoTictac);
+  const audioReset = new Audio(sonidoReset);
+  const audioCorrectoLargo = new Audio(sonidoCorrectoLargo);
+  const audioSwap = new Audio(sonidoSwap);
+  const inicializarJuego = useCallback(
+    (reset = false) => {
+      const seleccionados = EMOJIS_BASE.slice(0, numParejas);
+      const mazo = [...seleccionados, ...seleccionados]
+        .sort(() => Math.random() - 0.5)
+        .map((emoji, index) => ({
+          id: index,
+          emoji,
+          revelada: false,
+          emparejada: false,
+        }));
+      if (reset) {
+        audioReset.play();
+      }
+      setCartas(mazo);
+      setEncontrados(0);
+      setSeleccionadas([]);
+      setBloqueado(false);
+      setMensaje({
+        texto: "Toca dos tarjetas para buscar una pareja.",
+        tipo: "",
+      });
+    },
+    [numParejas],
+  );
 
   // Iniciar al montar el componente o cambiar dificultad
   useEffect(() => {
@@ -87,7 +106,9 @@ const Memorama = () => {
 
     if (nuevaSeleccion.length === 1) {
       setMensaje({ texto: "Elige otra tarjeta.", tipo: "" });
+      audioSeleccionar.play();
     } else if (nuevaSeleccion.length === 2) {
+      audioSeleccionar.play();
       revisarPareja(nuevaSeleccion, nuevasCartas);
     }
   };
@@ -104,8 +125,10 @@ const Memorama = () => {
         tableroActual[idx2].emparejada = true;
         const nuevosEncontrados = encontrados + 1;
         setEncontrados(nuevosEncontrados);
+        audioCorrecto.play();
 
         if (nuevosEncontrados === numParejas) {
+          audioCorrectoLargo.play();
           setMensaje({
             texto: `¡Muy bien! Completaste el tablero`,
             tipo: "success",
@@ -120,6 +143,7 @@ const Memorama = () => {
           texto: "No eran iguales. Intenta de nuevo.",
           tipo: "notice",
         });
+        audioFallo.play();
       }
 
       setCartas([...tableroActual]);
@@ -137,6 +161,7 @@ const Memorama = () => {
     setCartas(cartas.map((c) => ({ ...c, revelada: true })));
     setMensaje({ texto: "Observa las tarjetas un momento.", tipo: "notice" });
 
+    audioTictac.play();
     setTimeout(() => {
       setCartas(original.map((c) => ({ ...c, revelada: c.emparejada })));
       setBloqueado(false);
@@ -151,7 +176,7 @@ const Memorama = () => {
     <article className="memory-game">
       <GameHeader title="Memorama" />
       <div className="general-actions">
-        <button className="reset-button" onClick={inicializarJuego}>
+        <button className="reset-button" onClick={() => inicializarJuego(true)}>
           <i className="fa-solid fa-rotate-right"></i> Reiniciar
         </button>
         <button className="button-secondary" onClick={verBrevemente}>
@@ -180,7 +205,10 @@ const Memorama = () => {
             <button
               key={n}
               className={`difficulty-btn ${numParejas === n ? "active" : ""}`}
-              onClick={() => setNumParejas(n)}
+              onClick={() => {
+                audioSwap.play();
+                setNumParejas(n);
+              }}
             >
               {DIFICULTADES[n].nombre}
               <span>{n} parejas</span>
