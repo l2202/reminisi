@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/logica.css";
 import GameHeader from "../components/GameHeader";
+import sonidoCorrecto from "../assets/audio/correcto_corto.mp3";
+import sonidoFallo from "../assets/audio/fallo_corto.mp3";
 const categorias = [
   {
     nombre: "Frutas",
@@ -98,9 +100,13 @@ export default function Logica() {
 
   const [opciones, setOpciones] = useState([]);
   const [respuesta, setRespuesta] = useState("");
-  const [mensaje, setMensaje] = useState("Selecciona el emoji que no pertenece al grupo");
+  const [mensaje, setMensaje] = useState(
+    "Selecciona el emoji que no pertenece al grupo",
+  );
   const [bloqueado, setBloqueado] = useState(false);
 
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
   function mezclar(arr) {
     return [...arr].sort(() => Math.random() - 0.5);
   }
@@ -132,13 +138,13 @@ export default function Logica() {
 
     if (emoji === respuesta) {
       setMensaje("Correcto ✅");
-
+      audioCorrecto.play();
       setTimeout(() => {
         nuevaRonda();
       }, 1000);
     } else {
       setMensaje(`Incorrecto ❌`);
-
+      audioFallo.play();
       setTimeout(() => {
         nuevaRonda();
       }, 1000);

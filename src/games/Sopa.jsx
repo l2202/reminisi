@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import "./sopa.css";
 import { useNavigate } from "react-router-dom";
 import GameHeader from "../components/GameHeader";
+import sonidoSeleccionar from "../assets/audio/select2.mp3";
+import sonidoCorrecto from "../assets/audio/correcto_corto.mp3";
+import sonidoFallo from "../assets/audio/fallo_corto.mp3";
+import sonidoReset from "../assets/audio/reset.mp3";
+import sonidoCorrectoLargo from "../assets/audio/correcto_largo.wav";
 
 const bancoPalabras = [
   "CASA",
@@ -41,6 +46,11 @@ export default function Sopa() {
   const [bloqueado, setBloqueado] = useState(false);
   const [celdasEncontradas, setCeldasEncontradas] = useState(new Set());
 
+  const audioSeleccionar = new Audio(sonidoSeleccionar);
+  const audioCorrecto = new Audio(sonidoCorrecto);
+  const audioFallo = new Audio(sonidoFallo);
+  const audioReset = new Audio(sonidoReset);
+  const audioCorrectoLargo = new Audio(sonidoCorrectoLargo);
   const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
   const mezclar = (arr) => [...arr].sort(() => Math.random() - 0.5);
@@ -167,6 +177,7 @@ export default function Sopa() {
       });
       setSeleccion([]);
       setMensaje(`Encontraste ${encontrada.palabra}`);
+      audioCorrecto.play();
 
       return;
     }
@@ -185,6 +196,7 @@ export default function Sopa() {
         setMensaje("Intenta otra vez");
       }, 700);
     } else {
+      audioSeleccionar.play();
       setMensaje("Sigue...");
     }
   }
@@ -198,7 +210,13 @@ export default function Sopa() {
       <GameHeader title="Sopa de letras" />
 
       <div className="general-actions">
-        <button className="reset-button" onClick={nuevaSopa}>
+        <button
+          className="reset-button"
+          onClick={() => {
+            audioReset.play();
+            nuevaSopa();
+          }}
+        >
           Reiniciar
         </button>
       </div>
@@ -227,7 +245,7 @@ export default function Sopa() {
         )}
       </div>
 
-      <div>
+      <div className="word-list">
         {palabras.map((p) => (
           <div key={p} className={encontradas.has(p) ? "found" : ""}>
             {p}

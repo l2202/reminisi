@@ -9,7 +9,7 @@ import sonidoTictac from "../assets/audio/tictac.mp3";
 import sonidoReset from "../assets/audio/reset.mp3";
 import sonidoCorrectoLargo from "../assets/audio/correcto_largo.wav";
 import sonidoSwap from "../assets/audio/swap.mp3";
-
+ 
 const EMOJIS_BASE = [
   "🌞",
   "🌙",
