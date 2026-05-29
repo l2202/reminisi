@@ -68,13 +68,8 @@ export default function MenuJuegos() {
           Patrones
         </button>
 
-        {/* <button className="juego-card azul" onClick={() => navigate("/figuras")}>
-          <span>🔷</span>
-          Figuras
-        </button> */}
-
         <button
-          className="juego-card verde-esmeralda"
+          className="juego-card morado"
           onClick={() => navegarConSolido("/sopaLetras")}
         >
           <span><FontAwesomeIcon icon={faArrowDownAZ} /></span>
@@ -83,7 +78,7 @@ export default function MenuJuegos() {
 
         {
           <button
-            className="juego-card morado"
+            className="juego-card verde-esmeralda"
             onClick={() => navegarConSolido("/Logica")}
           >
             <span><FontAwesomeIcon icon={faUserSecret} /></span>

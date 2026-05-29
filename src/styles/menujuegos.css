@@ -1,4 +1,5 @@
-/* Contenedor Principal */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* ESTILOS VIEJOS
 .menu-juegos-container {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: #f4f7f9;
@@ -10,7 +11,7 @@
   position: relative;
 }
 
-/* Encabezado con botón de regreso */
+// Encabezado con botón de regreso
 .navigate-header {
   display: flex;
   align-items: center;
@@ -48,7 +49,7 @@
   margin: 0;
 }
 
-/* Grid de Botones */
+// Grid de Botones
 .juegos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -57,7 +58,7 @@
   max-width: 1000px;
 }
 
-/* Estilo Base de las Tarjetas/Botones */
+// Estilo Base de las Tarjetas/Botones  
 .juego-card {
   border: none;
   border-radius: 20px;
@@ -79,14 +80,14 @@
   box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
-/* Variedades de Colores (según tu imagen) */
+// Variedades de Colores (según tu imagen)
 .rosa { background-color: #ff3399; }
 .morado { background-color: #6366f1; }
 .verde-esmeralda { background-color: #00bfa5; }
 .naranja { background-color: #ff8c00; }
 .azul { background-color: #2b82fb; }
 
-/* Botón de emergencia (Teléfono rojo) */
+// Botón de emergencia (Teléfono rojo)
 .emergency-fab {
   position: fixed;
   bottom: 25px;
@@ -103,4 +104,133 @@
   font-size: 1.5rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   cursor: pointer;
+}
+*/
+
+/* ESTILOS NUEVOS */
+/* --- Contenedor Principal --- */
+.menu-juegos-container {
+
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* --- Grid Responsivo --- */
+.juegos-grid {
+    display: grid;
+    grid-template-columns: repeat(3,  1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* --- Estilos base de las tarjetas --- */
+.juego-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.juego-card span {
+    font-size: 2.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Animaciones de Hover --- */
+.juego-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.juego-card:active {
+    transform: translateY(-2px);
+}
+
+/* --- Paleta de Colores (Clases) --- */
+.rosa { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); }
+.morado { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.verde-esmeralda { background: linear-gradient(135deg, #2af598 0%, #009efd 100%); }
+.naranja { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+/* --- Ajuste responsivo extra --- */
+@media (max-width: 600px) {
+    .menu-juegos-container { padding: 1rem; }
+    .juegos-grid { grid-template-columns: 1fr; }
+}
+
+.navigate-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.back-btn {
+    background: #f0f2f5;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #555;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #e4e6eb;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
+
+.juego-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+body {
+    background: linear-gradient(135deg, #f0f2f5 25%, transparent 25%) -50px 0,
+                linear-gradient(225deg, #f0f2f5 25%, transparent 25%) -50px 0,
+                linear-gradient(315deg, #f0f2f5 25%, transparent 25%),
+                linear-gradient(45deg, #f0f2f5 25%, transparent 25%);
+    background-size: 100px 100px;
+    background-color: #e2e8f0; /* Un gris muy suave */
+    animation: move-background 20s linear infinite; /* Fondo animado sutil */
+}
+
+/* Definición de la animación del fondo */
+@keyframes move-background {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
 }
