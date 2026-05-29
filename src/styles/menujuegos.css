@@ -219,14 +219,20 @@
 }
 
 
+/* --- Colores de Acento (Glow effect) --- */
+.verde-esmeralda:hover { box-shadow: 0 0 20px #ff7eb3; }
+.naranja:hover { box-shadow: 0 0 20px #764ba2; }
+.rosa:hover { box-shadow: 0 0 20px #2af598; }
+.morado:hover { box-shadow: 0 0 20px #f5576c; }
+
 body {
     background: linear-gradient(135deg, #f0f2f5 25%, transparent 25%) -50px 0,
                 linear-gradient(225deg, #f0f2f5 25%, transparent 25%) -50px 0,
                 linear-gradient(315deg, #f0f2f5 25%, transparent 25%),
                 linear-gradient(45deg, #f0f2f5 25%, transparent 25%);
     background-size: 100px 100px;
-    background-color: #e2e8f0; /* Un gris muy suave */
-    animation: move-background 20s linear infinite; /* Fondo animado sutil */
+    background-color: #f8f8f8; 
+    animation: move-background 20s linear infinite; 
 }
 
 /* Definición de la animación del fondo */
