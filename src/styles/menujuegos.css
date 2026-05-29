@@ -127,23 +127,35 @@
 
 /* --- Estilos base de las tarjetas --- */
 .juego-card {
+    position: relative;
+    min-height: 180px;
+    overflow: hidden;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.juego-card-content {
+    width: 100%;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    padding: 30px 20px;
+    padding: 38px 20px 30px;
+    background: transparent;
     border: none;
-    border-radius: 20px;
     cursor: pointer;
     font-size: 1.2rem;
     font-weight: 800;
     color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: inherit;
+    text-align: center;
 }
 
-.juego-card span {
+.juego-card-content span {
     font-size: 2.5rem;
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
@@ -153,6 +165,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.favorite-game-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-game-btn:hover,
+.favorite-game-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.9);
+    color: #f5a400;
+    transform: scale(1.08);
+}
+
+.favorite-game-btn.active {
+    background: #ffffff;
+    color: #f5a400;
 }
 
 /* --- Animaciones de Hover --- */
@@ -175,6 +219,19 @@
 @media (max-width: 600px) {
     .menu-juegos-container { padding: 1rem; }
     .juegos-grid { grid-template-columns: 1fr; }
+    .juego-card,
+    .juego-card-content { min-height: 150px; }
+    .juego-card-content { padding: 34px 16px 24px; }
+    .favorite-game-btn {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .juegos-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .navigate-header {
